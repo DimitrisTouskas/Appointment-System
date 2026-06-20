@@ -2,14 +2,14 @@
     require_once "../models/Appointment.php";
 
     class AppointmentController {
-        private string $appointment_date;
-        private string $appointment_time;
-        private string $appointment_notes;
+        private ?string $appointment_date = NULL;
+        private ?string $appointment_time = NULL;
+        private ?string $appointment_notes = NULL;
     
         public function __construct(
-            string $appointment_date,
-            string $appointment_time,
-            string $appointment_notes
+            ?string $appointment_date = NULL , 
+            ?string $appointment_time = NULL,
+            ?string $appointment_notes = NULL
         )
     {
         $this->appointment_date = $appointment_date;
@@ -48,9 +48,15 @@
         return "Cannot set previous time";
     }
 
+    $appointment = new Appointment();
     
-        $appointment = new Appointment();
     $newAppointment = $appointment -> createAppointment($this->appointment_date ,$this-> appointment_time , $this->appointment_notes , $_SESSION['User_id'] );
     return true;
+}
+
+public function index(){
+    $list = new Appointment;
+    $view_list = $list -> viewAppointments($_SESSION['User_id']);
+    return $view_list;
 }
 }

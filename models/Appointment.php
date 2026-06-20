@@ -29,4 +29,19 @@
             }
             return true;
         }
+
+
+        public function viewAppointments($user_id){
+            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM Appointments WHERE user_id = ?";
+            $stmt = $this->conn->prepare($sql);
+            
+            if(!$stmt){
+                die("Prepare fail: " . $this->conn->error);
+            }
+            $stmt -> bind_param('i' , $user_id);
+            $stmt ->execute();
+            $result = $stmt->get_result();
+            $assoc = $result->fetch_all(MYSQLI_ASSOC);
+            return $assoc;
+        }
     }
