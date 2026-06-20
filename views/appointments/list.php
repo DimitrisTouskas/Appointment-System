@@ -25,6 +25,15 @@
                 <td><?= $appointment['appointment_time'] ?></td>
                 <td><?= $appointment['status'] ?></td>
                 <td><?= $appointment['notes'] ?></td>
+                <td><form action="delete.php" method="POST">
+                        <button>Delete</button>
+                        <input type="hidden" id="appointment_id" name="appointment_id" value="<?= $appointment['id'] ?>" />
+
+                    </form>
+                    <form action="" >
+                        <button>Edit</button>
+                    </form>
+                </td>
             </tr>
             <?php endforeach; ?>
         </tbody>

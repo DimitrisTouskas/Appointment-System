@@ -44,4 +44,15 @@
             $assoc = $result->fetch_all(MYSQLI_ASSOC);
             return $assoc;
         }
+        public function delete($appointment_id){
+            $sql = "DELETE FROM appointments WHERE id= ?";
+            $stmt = $this->conn->prepare($sql);
+
+            if(!$stmt){
+                die("Prepare fail:" . $this->conn->error);
+            }
+            $stmt -> bind_param("i", $appointment_id);
+            $stmt -> execute();
+            return true;
+        } 
     }

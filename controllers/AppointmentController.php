@@ -59,4 +59,20 @@ public function index(){
     $view_list = $list -> viewAppointments($_SESSION['User_id']);
     return $view_list;
 }
+public function delete($appointment_id){
+
+    if($this->emptyInputId($appointment_id))
+    {
+        return "Cannot delete this appointment";
+    }
+    $appointment = new Appointment();
+    $appointment->delete($appointment_id);
+    return true;
+    
+}
+ private function emptyInputId($appointment_id): bool
+        {
+            return empty($appointment_id);
+
+    }
 }
