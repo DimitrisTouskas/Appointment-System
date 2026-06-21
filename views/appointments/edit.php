@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <main>
+    <div> 
+        <form action="/appointment-system/appointments/edit.php" method="POST" onsubmit="return validateForm()">
+            <label for="date" class="form-label" >Appointment Date</label>
+            <input type="date" name="appointment_date" id="appointment_date" class="form-control" value="<?= $appointment['appointment_date'] ?>">
+            <label for="time" class="form-label">Appointment Time</label>
+            <input type="time" name="appointment_time" id="appointment_time" class="form-control" value="<?= $appointment['appointment_time'] ?>">
+            <label for="date" class="form-label" >Appointment Status</label>
+            <select name="status" id="status" class="form-select">
+                <option value="pending" <?= $appointment['status'] === 'pending' ? 'selected' : '' ?>>Pending</option>
+                <option value="confirmed"<?= $appointment['status'] === 'confirmed' ? 'selected' : '' ?>>Confirmed</option>
+                <option value="cancelled"<?= $appointment['status'] === 'cancelled' ? 'selected' : '' ?>>Cancelled</option>
+                <option value="completed"<?= $appointment['status'] === 'completed' ? 'selected' : '' ?>>Completed</option>
+            </select>
+            <label for="date" class="form-label">Appointment Notes to Remember</label>
+            <textarea name="appointment_notes" id="appointment_notes" class="form-control"><?= $appointment['notes'] ?></textarea>
+            <input type="hidden" id="appointment_id" name="appointment_id" value="<?= $appointment['id'] ?>" />
+            <button type="submit" class="btn btn-primary" >Edit Appointment</button>
+            
+        </form>
+    </div>
+    </main>
+<script src="/appointment-system/public/assets/js/edit-appointment.js"></script>
+</body>
+</html>

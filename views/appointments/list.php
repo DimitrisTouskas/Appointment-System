@@ -30,8 +30,9 @@
                         <input type="hidden" id="appointment_id" name="appointment_id" value="<?= $appointment['id'] ?>" />
 
                     </form>
-                    <form action="" >
+                    <form action="edit.php" method = "GET" >
                         <button>Edit</button>
+                        <input type="hidden" id="appointment_id" name="appointment_id" value="<?= $appointment['id'] ?>" />
                     </form>
                 </td>
             </tr>

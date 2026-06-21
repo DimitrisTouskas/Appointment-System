@@ -10,7 +10,7 @@
 <body>
     <main>
     <div> 
-        <form action="create.php" method="POST" onsubmit="return validateForm()">
+        <form action="../../appointments/create.php" method="POST" onsubmit="return validateForm()">
             <label for="date" class="form-label" >Appointment Date</label>
             <input type="date" name="appointment_date" id="appointment_date" class="form-control">
             <label for="time" class="form-label">Appointment Time</label>

@@ -27,7 +27,8 @@
         }
 
         public function register()
-{
+{   
+    $this->loginCheck();
     
     // 1. VALIDATION
     if ($this->emptyInputRegister()) {
@@ -102,16 +103,18 @@ private function validEmail(): bool
     return filter_var($this->email, FILTER_VALIDATE_EMAIL);
 }
 
-private function sessionCheck()
+private function loginCheck()
 {
-    if (!isset($_SESSION["User_id"])){
-        header("Location: /appointment-system/auth/login.php");
+    if (isset($_SESSION["User_id"])){
+        header("Location: /appointment-system/appointments/list.php");
         exit();
     }
 }
 
 public function login()
-{
+{  
+    $this->loginCheck();
+
     if ($this->emptyInputLogin()) {
         return "All fields are required";
     }
@@ -129,7 +132,7 @@ public function login()
     }
     if ($passCheck===true){
         $_SESSION["User_id"] = $foundUser['id'];
-        header("Location: /appointment-system/public/index.php");
+        header("Location: localhost:8888/appointment-system/appointments/list.php");
         exit();
     }else{
         echo "Wrong credentials try again";

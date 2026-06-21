@@ -55,4 +55,35 @@
             $stmt -> execute();
             return true;
         } 
+
+        public function findById($appointment_id){
+            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM Appointments WHERE id=?";
+            $stmt = $this->conn->prepare($sql);
+
+            if(!$stmt){
+                die("Prepare fail:" . $this->conn->error);
+            }
+            $stmt -> bind_param('i', $appointment_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $assoc = $result->fetch_assoc();
+            return $assoc;
+        }
+
+        public function updateAppointment($appointment_date , $appointment_time  , $appointment_notes , $appointment_status , $appointment_id  ){
+            $sql = "UPDATE Appointments SET appointment_date=? , appointment_time=? , status=? , notes=? WHERE id=? ";
+            $stmt = $this->conn ->prepare($sql);
+            
+            if (!$stmt) {
+                die("Prepare failed: " . $this->conn->error);
+            }
+
+            $stmt->bind_param("ssssi", $appointment_date , $appointment_time , $appointment_status ,$appointment_notes , $appointment_id);
+
+            if (!$stmt->execute()) {
+                die("Execute failed: " . $stmt->error);
+            }
+            return true;
+        }
+
     }
