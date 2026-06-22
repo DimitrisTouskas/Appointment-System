@@ -28,8 +28,6 @@
 
         public function register()
 {   
-    $this->loginCheck();
-    
     // 1. VALIDATION
     if ($this->emptyInputRegister()) {
         return "All fields are required";
@@ -103,7 +101,7 @@ private function validEmail(): bool
     return filter_var($this->email, FILTER_VALIDATE_EMAIL);
 }
 
-private function loginCheck()
+public function loginCheck()
 {
     if (isset($_SESSION["User_id"])){
         header("Location: /appointment-system/appointments/list.php");
@@ -113,7 +111,6 @@ private function loginCheck()
 
 public function login()
 {  
-    $this->loginCheck();
 
     if ($this->emptyInputLogin()) {
         return "All fields are required";
