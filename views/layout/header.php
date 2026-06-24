@@ -8,37 +8,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../public/assets/css/mainStyle.css">
+    
     <title>Appointment-System</title>
 </head>
-<style>
-  nav ul {
-    display: inline-block;
-    list-style-type: none;
-    margin-left:auto;
-    margin-right: 100px;
-    display: inline-block;
-    justify-content: space-between;
-}
 
-.search {
-    width: max-content;
-    display: flex;
-    align-items: center;
-    padding: 14px;
-    border-radius: 28px;
-    background: #f6f6f6;
-    margin-left:auto;
-    margin-right: 100px;
-}
-
-.search-input {
-    font-size: 16px;
-    font-family: "Lexend", sans-serif;
-    color: #333333;
-    margin-left: 14px;
-    border-radius: 28px;
-}
-</style>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Navbar</a>
