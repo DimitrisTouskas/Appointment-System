@@ -6,6 +6,6 @@
     $appointments = $controller->index();
   
     
-    require __DIR__ . "/../views/appointments/list.php";    
+    require __DIR__ . "/../views/appointments/list.php";   
 
 ?>

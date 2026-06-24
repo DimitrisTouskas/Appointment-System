@@ -1,7 +1,7 @@
 <?php
     session_start();
     session_destroy();
-    header("Location: /appointment-system/auth/login.php");
+    header("Location: ../views/auth/login.php");
     exit();
 
 ?>

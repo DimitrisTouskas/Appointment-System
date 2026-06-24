@@ -57,8 +57,8 @@
           Appointments
         </a>
         <div class="dropdown-menu"  aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Appointment list</a>
-          <a class="dropdown-item" href="#">Create new Appointment</a>
+          <a class="dropdown-item" href="../../appointments/list.php">Appointment list</a>
+          <a class="dropdown-item" href="../appointments/create.php">Create new Appointment</a>
         </div>
       </li>
       <li class="nav-item">
@@ -73,8 +73,12 @@
         <span class="search-icon material-symbols-outlined">search</span>
         <input class ="search-input" type="search" placeholder="Search">
       </div>
-    <i class="bi bi-person-circle"></i>
     </form>
+    <ul class="navbar-nav ms-auto">
+    <li class="nav-item">
+        <a class="nav-link text-danger" href="../../auth/logout.php">Logout</a>
+    </li>
+</ul>
 </div>
 </nav>
 </body>

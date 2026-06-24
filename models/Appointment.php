@@ -32,7 +32,7 @@
 
 
         public function viewAppointments($user_id){
-            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM Appointments WHERE user_id = ?";
+            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM Appointments WHERE user_id = ? ORDER BY appointment_time asc";
             $stmt = $this->conn->prepare($sql);
             
             if(!$stmt){

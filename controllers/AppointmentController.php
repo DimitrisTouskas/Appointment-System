@@ -62,7 +62,8 @@
         $appointment = new Appointment();
         
         $newAppointment = $appointment -> createAppointment($this->appointment_date ,$this-> appointment_time , $this->appointment_notes , $_SESSION['User_id'] );
-        return true;
+        header("Location: /appointment-system/appointments/list.php");
+            exit();
 }   
 
     public function index(){
