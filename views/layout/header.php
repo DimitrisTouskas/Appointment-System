@@ -31,8 +31,8 @@
           Appointments
         </a>
         <div class="dropdown-menu"  aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="../../appointments/list.php">Appointment list</a>
-          <a class="dropdown-item" href="../appointments/create.php">Create new Appointment</a>
+          <a class="dropdown-item" href="/appointment-system/appointments/list.php">Appointment list</a>
+          <a class="dropdown-item" href="/appointment-system/appointments/create.php">Create new Appointment</a>
         </div>
       </li>
       <li class="nav-item">
@@ -48,9 +48,12 @@
         <input class ="search-input" type="search" placeholder="Search">
       </div>
     </form>
-    <ul class="navbar-nav ms-auto">
+   <ul class="navbar-nav ms-auto">
     <li class="nav-item">
-        <a class="nav-link text-danger" href="../../auth/logout.php">Logout</a>
+        <i class="bi bi-person-circle text-white fs-4"></i>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-danger" href="/appointment-system/auth/logout.php">Logout</a>
     </li>
 </ul>
 </div>
