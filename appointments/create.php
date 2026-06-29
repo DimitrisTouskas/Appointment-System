@@ -8,10 +8,10 @@
         $appointment_notes = $_POST["appointment_notes"]??'';
         
         var_dump($_POST);
-        if($_POST['security_token']=== $_SESSION['csrf_token']){
+    if($_POST['security_token']=== $_SESSION['csrf_token']){
         $createAppointment = new AppointmentController($appointment_date , $appointment_time , $appointment_notes);
         $result = $createAppointment->create();
-        
+    
         echo json_encode($result);
         unset($_SESSION['csrf_token']);
         }else

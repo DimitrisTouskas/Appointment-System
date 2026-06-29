@@ -16,7 +16,7 @@
         //return $results;
     if($_POST['security_token']=== $_SESSION['csrf_token']){
         $createAppointment = new AppointmentController($appointment_date , $appointment_time , $appointment_notes);
-        $result = $createAppointment->edit();
+        $result = $createAppointment->update($appointment_id);
     }else
         echo("Invalid request");
     }
@@ -31,16 +31,3 @@
         require __DIR__ . "/../views/appointments/edit.php";
     }
 ?>
-
-
-
-if($_POST['security_token']=== $_SESSION['csrf_token']){
-        $createAppointment = new AppointmentController($appointment_date , $appointment_time , $appointment_notes);
-        $result = $createAppointment->create();
-
-
-           echo json_encode($result);
-        unset($_SESSION['csrf_token']);
-        }else
-            echo("Invalid request");
-    }
