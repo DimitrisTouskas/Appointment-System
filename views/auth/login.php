@@ -22,6 +22,8 @@
         <button type="submit">Login</button>
         <footer> Didnt have an account? <a href="register.php">Register Here</a></footer>
     </form>
+    <input type="hidden" id="security_token" name="security_token" value="<?php $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
+            echo $_SESSION['csrf_token']; ?>" />
 </main>
 <script src="../../public/assets/js/login.js"></script>
 </body>

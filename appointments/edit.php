@@ -14,6 +14,9 @@
         header("Location: /appointment-system/appointments/list.php");
         exit();
         //return $results;
+    if($_POST['security_token']=== $_SESSION['csrf_token']){
+        $createAppointment = new AppointmentController($appointment_date , $appointment_time , $appointment_notes);
+        $result = $createAppointment->edit();
     }
 
     if($_SERVER["REQUEST_METHOD"]==="GET"){
@@ -24,3 +27,9 @@
         require __DIR__ . "/../views/appointments/edit.php";
     }
 ?>
+
+
+
+if($_POST['security_token']=== $_SESSION['csrf_token']){
+        $createAppointment = new AppointmentController($appointment_date , $appointment_time , $appointment_notes);
+        $result = $createAppointment->create();

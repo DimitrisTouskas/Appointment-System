@@ -1,18 +1,16 @@
 <?php
+    include "../appointment-system/config/config.php";
     class Database{
-        private $host = "localhost";
-        private $dbname = 'schemaDB';
-        private $username = "root";
-        private $password = "root";
 
+        private array $config;
         public mysqli $conn;
 
         public function connect(){
             $this->conn = new mysqli(
-                $this-> host,
-                $this-> username,
-                $this->password,
-                $this->dbname
+                $this-> config['host'],
+                $this-> config['username'],
+                $this->config['password'],
+                $this->config['dbname']
             );
 
             if ($this->conn->connect_error){

@@ -15,10 +15,16 @@
 
         var_dump($_POST);
         $auth = new AuthController($email , $firstname , $lastname ,$password , $username ,  $password2);
-
+    
+    if($_POST['security_token']=== $_SESSION['csrf_token']){
+        $createSession = new AuthController($email , $firstname , $lastname ,$password , $username ,  $password2);
+        $result = $createSession->register();    
         $result = $auth->register();
-
+        
         echo json_encode($result);
+        unset($_SESSION['csrf_token']);
+        }else
+        echo("Invalid request");
     }
     
 ?>
