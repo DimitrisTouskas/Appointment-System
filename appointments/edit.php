@@ -12,12 +12,16 @@
         $editAppointmentPush = new AppointmentController($appointment_date, $appointment_time, $appointment_notes, $appointment_status);
         $results = $editAppointmentPush->update($appointment_id);
         header("Location: /appointment-system/appointments/list.php");
-        exit();
+    
         //return $results;
     if($_POST['security_token']=== $_SESSION['csrf_token']){
         $createAppointment = new AppointmentController($appointment_date , $appointment_time , $appointment_notes);
         $result = $createAppointment->edit();
+    }else
+        echo("Invalid request");
     }
+
+    
 
     if($_SERVER["REQUEST_METHOD"]==="GET"){
         $appointment_id = $_GET['appointment_id']??'';
@@ -33,3 +37,10 @@
 if($_POST['security_token']=== $_SESSION['csrf_token']){
         $createAppointment = new AppointmentController($appointment_date , $appointment_time , $appointment_notes);
         $result = $createAppointment->create();
+
+
+           echo json_encode($result);
+        unset($_SESSION['csrf_token']);
+        }else
+            echo("Invalid request");
+    }

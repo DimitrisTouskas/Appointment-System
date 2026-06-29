@@ -1,9 +1,14 @@
 <?php
-    include "../appointment-system/config/config.php";
+    // include "../appointment-system/config/config.php";
     class Database{
 
         private array $config;
         public mysqli $conn;
+
+        public function __construct()
+        {
+            $this->config = require __DIR__ . '/../../config/config.php';
+        }
 
         public function connect(){
             $this->conn = new mysqli(
