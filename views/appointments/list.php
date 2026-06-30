@@ -21,18 +21,18 @@
         <tbody>
             <?php foreach($appointments as $appointment): ?>
             <tr>
-                <td><?= $appointment['appointment_date'] ?></td>
-                <td><?= $appointment['appointment_time'] ?></td>
-                <td><?= $appointment['status'] ?></td>
-                <td><?= $appointment['notes'] ?></td>
+                <td><?= htmlspecialchars($appointment['appointment_date']) ?></td>
+                <td><?= htmlspecialchars($appointment['appointment_time']) ?></td>
+                <td><?= htmlspecialchars($appointment['status']) ?></td>
+                <td><?= htmlspecialchars($appointment['notes']) ?></td>
                 <td><form action="delete.php" method="POST">
                         <button>Delete</button>
-                        <input type="hidden" id="appointment_id" name="appointment_id" value="<?= $appointment['id'] ?>" />
+                        <input type="hidden" id="appointment_id" name="appointment_id" value="<?= htmlspecialchars($appointment['id']) ?>" />
 
                     </form>
                     <form action="edit.php" method = "GET" >
                         <button>Edit</button>
-                        <input type="hidden" id="appointment_id" name="appointment_id" value="<?= $appointment['id'] ?>" />
+                        <input type="hidden" id="appointment_id" name="appointment_id" value="<?= htmlspecialchars($appointment['id']) ?>" />
                     </form>
                 </td>
             </tr>
