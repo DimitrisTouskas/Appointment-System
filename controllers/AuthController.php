@@ -129,7 +129,7 @@ public function login()
     }
     if ($passCheck===true){
         $_SESSION["User_id"] = $foundUser['id'];
-        header("Location: localhost:8888/appointment-system/appointments/list.php");
+        header("Location: /appointment-system/appointments/list.php");
         exit();
     }else{
         echo "Wrong credentials try again";

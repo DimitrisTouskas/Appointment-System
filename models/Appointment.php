@@ -19,24 +19,27 @@
 
             
             if (!$stmt) {
-                die("Prepare failed: " . $this->conn->error);
-            }
+             error_log("Prepare failed: " . $this->conn->error);
+    return false;
+}
 
             $stmt->bind_param("sssi", $appointment_date , $appointment_time , $appointment_note , $user_id);
 
             if (!$stmt->execute()) {
-                die("Execute failed: " . $stmt->error);
+                error_log("Execute failed: " . $stmt->error);
+                return false;
             }
             return true;
         }
 
 
         public function viewAppointments($user_id){
-            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM appointments WHERE user_id = ? ORDER BY appointment_time asc";
+            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM appointments WHERE user_id = ?  ORDER BY appointment_time asc";
             $stmt = $this->conn->prepare($sql);
             
             if(!$stmt){
-                die("Prepare fail: " . $this->conn->error);
+            error_log("Prepare failed: " . $this->conn->error);
+            return [];
             }
             $stmt -> bind_param('i' , $user_id);
             $stmt ->execute();
@@ -44,44 +47,48 @@
             $assoc = $result->fetch_all(MYSQLI_ASSOC);
             return $assoc;
         }
-        public function delete($appointment_id){
-            $sql = "DELETE FROM appointments WHERE id= ?";
+        public function delete($appointment_id , $user_id){
+            $sql = "DELETE FROM appointments WHERE id= ? AND user_id=?" ;
             $stmt = $this->conn->prepare($sql);
 
             if(!$stmt){
-                die("Prepare fail:" . $this->conn->error);
+            error_log("Prepare failed: " . $this->conn->error);
+            return false;
             }
-            $stmt -> bind_param("i", $appointment_id);
+            $stmt -> bind_param("ii", $appointment_id , $user_id);
             $stmt -> execute();
             return true;
         } 
 
-        public function findById($appointment_id){
-            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM appointments WHERE id=?";
+        public function findById($appointment_id , $user_id){
+            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM appointments WHERE id=? AND user_id=?" ;
             $stmt = $this->conn->prepare($sql);
 
             if(!$stmt){
-                die("Prepare fail:" . $this->conn->error);
+            error_log("Prepare failed: " . $this->conn->error);
+            return false;
             }
-            $stmt -> bind_param('i', $appointment_id);
+            $stmt -> bind_param('ii', $appointment_id , $user_id);
             $stmt->execute();
             $result = $stmt->get_result();
             $assoc = $result->fetch_assoc();
             return $assoc;
         }
 
-        public function updateAppointment($appointment_date , $appointment_time  , $appointment_notes , $appointment_status , $appointment_id  ){
-            $sql = "UPDATE appointments SET appointment_date=? , appointment_time=? , status=? , notes=? WHERE id=? ";
+        public function updateAppointment($appointment_date , $appointment_time  , $appointment_notes , $appointment_status , $appointment_id , $user_id  ){
+            $sql = "UPDATE appointments SET appointment_date=? , appointment_time=? , status=? , notes=? WHERE id=? AND user_id=?" ;
             $stmt = $this->conn ->prepare($sql);
             
             if (!$stmt) {
-                die("Prepare failed: " . $this->conn->error);
+            error_log("Prepare failed: " . $this->conn->error);
+            return false;
             }
 
-            $stmt->bind_param("ssssi", $appointment_date , $appointment_time , $appointment_status ,$appointment_notes , $appointment_id);
+            $stmt->bind_param("ssssii", $appointment_date , $appointment_time , $appointment_status ,$appointment_notes , $appointment_id , $user_id);
 
             if (!$stmt->execute()) {
-                die("Execute failed: " . $stmt->error);
+            error_log("Execute failed: " . $stmt->error);
+            return false;
             }
             return true;
         }

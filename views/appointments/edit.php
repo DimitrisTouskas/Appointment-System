@@ -25,7 +25,7 @@
                 <option value="completed"<?= $appointment['status'] === 'completed' ? 'selected' : '' ?>>Completed</option>
             </select>
             <label for="date" class="form-label">Appointment Notes to Remember</label>
-            <textarea name="appointment_notes" id="appointment_notes" class="form-control"><?= htmlspecialchars($appointment['notes']) ?></textarea>
+            <textarea name="appointment_notes" id="appointment_notes" class="form-control"><?= htmlspecialchars($appointment['notes'] ?? '') ?></textarea>
             <input type="hidden" id="appointment_id" name="appointment_id" value="<?= htmlspecialchars($appointment['id']) ?>" />
             <input type="hidden" id="security_token" name="security_token" value="<?php $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
             echo $_SESSION['csrf_token']; ?>" />

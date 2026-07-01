@@ -19,7 +19,8 @@
             );
 
             if ($this->conn->connect_error){
-                die("Connection failed: " . $this->conn->connect_error);
+                error_log("Prepare failed :" . $this->conn->error );
+                return false;
             }
             return $this->conn;
         }

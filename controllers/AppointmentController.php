@@ -80,7 +80,7 @@
             return "Cannot delete this appointment";
         }
         $appointment = new Appointment();
-        $appointment->delete($appointment_id);
+        $appointment->delete($appointment_id , $_SESSION['User_id']);
         return true;
     
     }
@@ -89,7 +89,7 @@
             return empty($appointment_id);
 
     }
-    public function update($appointment_id){
+    public function update($appointment_id ){
         $this->sessionCheck();
         if ($this->emptyInputDate()) {
             return "Date field are required";
@@ -110,7 +110,7 @@
 
         $appointmentEdit = new Appointment();
         
-        $editAppointment = $appointmentEdit -> updateAppointment($this->appointment_date , $this->appointment_time  ,$this->appointment_notes , $this->appointment_status , $appointment_id);
+        $editAppointment = $appointmentEdit -> updateAppointment($this->appointment_date , $this->appointment_time  ,$this->appointment_notes , $this->appointment_status , $appointment_id , $_SESSION['User_id']);
         return true;
     }
 
@@ -118,7 +118,7 @@
     public function findById($appointment_id){
         $this->sessionCheck();
         $fetchData = new Appointment;
-        $getData = $fetchData -> findById($appointment_id);
+        $getData = $fetchData -> findById($appointment_id , $_SESSION['User_id']);
         return $getData;
     }
 

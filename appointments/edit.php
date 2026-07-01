@@ -24,6 +24,11 @@
 
         $editAppointmentPull = new AppointmentController();
         $appointment = $editAppointmentPull->findById($appointment_id);
+        if($appointment!= NULL){
         require __DIR__ . "/../views/appointments/edit.php";
+        }else{
+        header("Location: /appointment-system/appointments/list.php");
+        exit();
+        }
     }
 ?>

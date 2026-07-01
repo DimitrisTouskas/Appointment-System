@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://phptutorial.net/app/css/style.css">
 
-    <title>Register</title>
+    <title>Login</title>
 </head>
 <body>
 <main>
-    <form name="registerForm" action="../../auth/login.php" method="POST">
-        <h1> Sign Up </h1>
+    <form name="loginForm" action="../../auth/login.php" method="POST">
+        <h1> Login </h1>
         <div>
             <label for="email">Email:</label>
             <input type="text" name="email" id="email">
@@ -21,9 +21,9 @@
         </div>
         <button type="submit">Login</button>
         <footer> Didnt have an account? <a href="register.php">Register Here</a></footer>
+        <input type="hidden" id="security_token" name="security_token" value="<?php $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
+        echo $_SESSION['csrf_token']; ?>" />
     </form>
-    <input type="hidden" id="security_token" name="security_token" value="<?php $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
-            echo $_SESSION['csrf_token']; ?>" />
 </main>
 <script src="../../public/assets/js/login.js"></script>
 </body>

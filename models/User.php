@@ -19,13 +19,15 @@
 
             
             if (!$stmt) {
-                die("Prepare failed: " . $this->conn->error);
+            error_log("Prepare failed: " . $this->conn->error);
+            return false;
             }
 
             $stmt->bind_param("sssss", $username, $email, $password , $first_name , $last_name);
 
-if (!$stmt->execute()) {
-    die("Execute failed: " . $stmt->error);
+        if (!$stmt->execute()) {
+            error_log("Execute failed: " . $stmt->error);
+            return false;
 }
 
     return true;
