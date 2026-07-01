@@ -11,27 +11,27 @@
 
         }
 
-        public function createUser($username, $email, $password , $firstname , $lastname) {
+        public function createUser($username, $email, $password , $first_name , $last_name) {
 
-            $sql = "INSERT INTO Users(username, email, password , first_name , last_name) VALUES (?, ?, ?, ?, ? )";
+            $sql = "INSERT INTO users(username, email, password , first_name , last_name) VALUES (?, ?, ?, ?, ? )";
 
             $stmt = $this->conn->prepare($sql);
 
-            // 👉 ΕΔΩ το βάζεις
+            
             if (!$stmt) {
                 die("Prepare failed: " . $this->conn->error);
             }
 
-            $stmt->bind_param("sssss", $username, $email, $password , $firstname , $lastname);
+            $stmt->bind_param("sssss", $username, $email, $password , $first_name , $last_name);
 
 if (!$stmt->execute()) {
     die("Execute failed: " . $stmt->error);
 }
 
-die("INSERT SUCCESS");
+    return true;
         }
         public function usernameExists(string $username){
-            $sql = "SELECT id FROM Users WHERE username=?";
+            $sql = "SELECT id FROM users WHERE username=?";
             $stmt = $this->conn->prepare($sql);
             
             $stmt->bind_param("s" , $username);
@@ -41,7 +41,7 @@ die("INSERT SUCCESS");
             return $stmt->num_rows > 0;
         }
         public function emailExists(string $email){
-            $sql = "SELECT id FROM Users WHERE email=?";
+            $sql = "SELECT id FROM users WHERE email=?";
             $stmt = $this->conn->prepare($sql);
             
             $stmt->bind_param("s" , $email);
@@ -53,7 +53,7 @@ die("INSERT SUCCESS");
     }
 
         public function  findByEmail(string $email){
-            $sql = "SELECT * FROM Users WHERE email=?";
+            $sql = "SELECT * FROM users WHERE email=?";
             $stmt = $this->conn-> prepare($sql);
            
             $stmt -> bind_param('s' , $email);

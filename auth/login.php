@@ -11,11 +11,8 @@
         $username = $_POST['username']??'';
         $password2 = $_POST['password2']??'';
 
-        var_dump($_POST);
-        $auth = new AuthController ($email , $password , $password2);
-        if($_POST['security_token']=== $_SESSION['csrf_token']){
-        $createSession = new AuthController($email , $password , $password2);
-        $result = $createSession->login();    
+        $auth = new AuthController (email:$email , password:$password , password2:$password2);
+        if($_POST['security_token']=== $_SESSION['csrf_token']){    
         $result = $auth->login();
         
         echo json_encode($result);

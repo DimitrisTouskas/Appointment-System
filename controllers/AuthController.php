@@ -3,8 +3,8 @@
     require_once "../models/User.php";
     class AuthController{
         private ?string  $username=NULL;
-        private ?string $firstname=NULL;
-        private ?string $lastname=NULL;
+        private ?string $first_name=NULL;
+        private ?string $last_name=NULL;
         private string  $email;
         private string  $password;
         private ?string  $password2=NULL;
@@ -12,15 +12,15 @@
         public function __construct(
             string $email,
             string $password,
-            ?string $firstname=NULL,
-            ?string $lastname=NULL,
+            ?string $first_name=NULL,
+            ?string $last_name=NULL,
             ?string $username = NULL,
             ?string $password2 =NULL,
         )
         {
             $this->email = trim(strtolower($email));
-            $this->firstname = $firstname!==null ? trim($firstname):null;
-            $this->lastname = $lastname!==null ? trim($lastname):null;
+            $this->first_name = $first_name!==null ? trim($first_name):null;
+            $this->last_name = $last_name!==null ? trim($last_name):null;
             $this->password = trim($password);
             $this->username = $username!==null ? trim($username):null;
             $this->password2 = $password2!==null ? trim($password2):null;
@@ -66,8 +66,8 @@
         $this->username,
         $this->email,
         $hashedPassword,
-        $this->firstname,
-        $this->lastname
+        $this->first_name,
+        $this->last_name
     );
 
     // 5. RESPONSE
@@ -76,8 +76,8 @@
                 "message" => "User registered successfully"];
     }
 
-    return ["status" => "success",
-                "message" => "Somethink went wrong"];
+    return ["status" => "error",
+                "message" => "Something went wrong try again"];
 }
 
 private function emptyInputLogin(): bool
@@ -92,8 +92,8 @@ private function emptyInputRegister(): bool
         || empty($this->email)
         || empty($this->password)
         || empty($this->password2)
-        || empty($this->firstname)
-        || empty($this->lastname);
+        || empty($this->first_name)
+        || empty($this->last_name);
 }
 
 private function validEmail(): bool

@@ -1,8 +1,8 @@
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
-    lastname VARCHAR(50),
-    fistname varchar(50),
+    last_name VARCHAR(50),
+    first_name varchar(50),
     email VARCHAR(150) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     role ENUM('user', 'admin') DEFAULT 'user',
@@ -22,7 +22,7 @@ CREATE TABLE appointments (
 
     CONSTRAINT fk_appointment_user
         FOREIGN KEY (user_id)
-        REFERENCES Users(id)σ 
+        REFERENCES users(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );

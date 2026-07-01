@@ -9,14 +9,10 @@
         $appointment_notes = $_POST['appointment_notes']??'';
         $appointment_status = $_POST['status']??'';
 
+        if($_POST['security_token']=== $_SESSION['csrf_token']){
         $editAppointmentPush = new AppointmentController($appointment_date, $appointment_time, $appointment_notes, $appointment_status);
         $results = $editAppointmentPush->update($appointment_id);
         header("Location: /appointment-system/appointments/list.php");
-    
-        //return $results;
-    if($_POST['security_token']=== $_SESSION['csrf_token']){
-        $createAppointment = new AppointmentController($appointment_date , $appointment_time , $appointment_notes);
-        $result = $createAppointment->update($appointment_id);
     }else
         echo("Invalid request");
     }

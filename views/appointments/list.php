@@ -19,6 +19,7 @@
             </tr>
         </thead>
         <tbody>
+            <?php $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); ?>
             <?php foreach($appointments as $appointment): ?>
             <tr>
                 <td><?= htmlspecialchars($appointment['appointment_date']) ?></td>
@@ -27,8 +28,8 @@
                 <td><?= htmlspecialchars($appointment['notes']) ?></td>
                 <td><form action="delete.php" method="POST">
                         <button>Delete</button>
-                        <input type="hidden" id="appointment_id" name="appointment_id" value="<?= htmlspecialchars($appointment['id']) ?>" />
-
+                        <input type="hidden" id="appointment_id" name="appointment_id" value="<?= htmlspecialchars($appointment['id']); ?>" />
+                        <input type="hidden" name="security_token" value="<?php echo $_SESSION['csrf_token']; ?>" >
                     </form>
                     <form action="edit.php" method = "GET" >
                         <button>Edit</button>

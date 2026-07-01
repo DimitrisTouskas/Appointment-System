@@ -13,7 +13,7 @@
 
         public function createAppointment($appointment_date , $appointment_time , $appointment_note , $user_id) {
 
-            $sql = "INSERT INTO Appointments(appointment_date , appointment_time , notes , user_id) VALUES (?, ?, ? , ?)";
+            $sql = "INSERT INTO appointments(appointment_date , appointment_time , notes , user_id) VALUES (?, ?, ? , ?)";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -32,7 +32,7 @@
 
 
         public function viewAppointments($user_id){
-            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM Appointments WHERE user_id = ? ORDER BY appointment_time asc";
+            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM appointments WHERE user_id = ? ORDER BY appointment_time asc";
             $stmt = $this->conn->prepare($sql);
             
             if(!$stmt){
@@ -57,7 +57,7 @@
         } 
 
         public function findById($appointment_id){
-            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM Appointments WHERE id=?";
+            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM appointments WHERE id=?";
             $stmt = $this->conn->prepare($sql);
 
             if(!$stmt){
@@ -71,7 +71,7 @@
         }
 
         public function updateAppointment($appointment_date , $appointment_time  , $appointment_notes , $appointment_status , $appointment_id  ){
-            $sql = "UPDATE Appointments SET appointment_date=? , appointment_time=? , status=? , notes=? WHERE id=? ";
+            $sql = "UPDATE appointments SET appointment_date=? , appointment_time=? , status=? , notes=? WHERE id=? ";
             $stmt = $this->conn ->prepare($sql);
             
             if (!$stmt) {

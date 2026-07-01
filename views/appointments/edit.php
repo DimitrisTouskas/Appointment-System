@@ -1,3 +1,5 @@
+<?php /** @var array $appointments */ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
