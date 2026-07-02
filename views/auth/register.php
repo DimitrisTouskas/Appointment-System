@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,9 +44,9 @@
         </div>
         <button type="submit">Register</button>
         <footer> Already member? <a href="login.php">Login Here</a></footer>
-    </form>
-    <input type="hidden" id="security_token" name="security_token" value="<?php $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
+        <input type="hidden" id="security_token" name="security_token" value="<?php $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
             echo $_SESSION['csrf_token']; ?>" />
+    </form>
 </main>
 <script src="../../public/assets/js/register.js"></script>
 </body>

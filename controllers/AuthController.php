@@ -1,7 +1,9 @@
 <?php 
-        
+    require_once "../app/core/Database.php";
     require_once "../models/User.php";
-    class AuthController{
+    require_once "../app/core/Controller.php";
+    
+    class AuthController extends Controller{
         private ?string  $username=NULL;
         private ?string $first_name=NULL;
         private ?string $last_name=NULL;
@@ -42,7 +44,10 @@
     }
 
     // 2. BUSINESS RULES (Model check)
-    $user = new User();
+    $db = new Database;
+    $connection = $db->connect();
+    $user = new User($connection);
+
 
     if ($user->emailExists($this->email)) {
         return [
@@ -104,8 +109,7 @@ private function validEmail(): bool
 public function loginCheck()
 {
     if (isset($_SESSION["User_id"])){
-        header("Location: /appointment-system/appointments/list.php");
-        exit();
+        $this->redirect("/appointment-system/appointments/list.php");
     }
 }
 
@@ -118,7 +122,9 @@ public function login()
     if (!$this->validEmail()) {
         return "Invalid email format";
     }
-    $user = new User();
+    $db = new Database;
+    $connection = $db->connect();
+    $user = new User($connection);
     $foundUser = $user -> findByEmail($this-> email);
 
     if($foundUser!== Null){
@@ -129,8 +135,7 @@ public function login()
     }
     if ($passCheck===true){
         $_SESSION["User_id"] = $foundUser['id'];
-        header("Location: /appointment-system/appointments/list.php");
-        exit();
+        $this->redirect("/appointment-system/appointments/list.php");
     }else{
         echo "Wrong credentials try again";
     }

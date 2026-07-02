@@ -1,15 +1,8 @@
 <?php
     require_once "../app/core/Database.php";
+    require_once "../app/core/Model.php";
 
-    class User {
-        
-        public mysqli $conn;
-
-        public function __construct(){
-            $db = new Database();
-            $this->conn = $db->connect();
-
-        }
+    class User extends Model {
 
         public function createUser($username, $email, $password , $first_name , $last_name) {
 

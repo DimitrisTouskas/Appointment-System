@@ -1,7 +1,9 @@
 <?php
+    require_once "../app/core/Database.php";
     require_once "../models/Appointment.php";
+    require_once "../app/core/Controller.php";
 
-    class AppointmentController {
+    class AppointmentController extends Controller {
         private ?string $appointment_date = NULL;
         private ?string $appointment_time = NULL;
         private ?string $appointment_notes = NULL;
@@ -33,8 +35,7 @@
     private function sessionCheck()
     {
         if (!isset($_SESSION["User_id"])){
-            header("Location: /appointment-system/auth/login.php");
-            exit();
+            $this->redirect("/appointment-system/auth/login.php");
         }
     }
 
@@ -59,16 +60,21 @@
             return "Cannot set previous time";
         }
 
-        $appointment = new Appointment();
+        $db = new Database;
+        $connection = $db->connect();
+        $appointment = new Appointment($connection);
         
         $newAppointment = $appointment -> createAppointment($this->appointment_date ,$this-> appointment_time , $this->appointment_notes , $_SESSION['User_id'] );
-        header("Location: /appointment-system/appointments/list.php");
-            exit();
-}   
+        $this->redirect("/appointment-system/appointments/list.php");
+        }   
 
     public function index(){
         $this->sessionCheck();
-        $list = new Appointment;
+        
+        $db = new Database;
+        $connection = $db->connect();
+        $list = new Appointment($connection);
+
         $view_list = $list -> viewAppointments($_SESSION['User_id']);
         return $view_list;
     }
@@ -79,7 +85,10 @@
         {
             return "Cannot delete this appointment";
         }
-        $appointment = new Appointment();
+        $db = new Database;
+        $connection = $db->connect();
+        $appointment = new Appointment($connection);
+        
         $appointment->delete($appointment_id , $_SESSION['User_id']);
         return true;
     
@@ -108,7 +117,9 @@
             return "Cannot set previous time";
         }
 
-        $appointmentEdit = new Appointment();
+        $db = new Database;
+        $connection = $db->connect();
+        $appointmentEdit = new Appointment($connection);
         
         $editAppointment = $appointmentEdit -> updateAppointment($this->appointment_date , $this->appointment_time  ,$this->appointment_notes , $this->appointment_status , $appointment_id , $_SESSION['User_id']);
         return true;
@@ -117,7 +128,11 @@
 
     public function findById($appointment_id){
         $this->sessionCheck();
-        $fetchData = new Appointment;
+        
+        $db = new Database;
+        $connection = $db->connect();
+        $fetchData = new Appointment($connection);
+
         $getData = $fetchData -> findById($appointment_id , $_SESSION['User_id']);
         return $getData;
     }

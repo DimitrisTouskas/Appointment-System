@@ -1,15 +1,9 @@
 <?php
     require_once "../app/core/Database.php";
+    require_once "../app/core/Model.php";
 
-    class Appointment {
+    class Appointment extends Model{
         
-        public mysqli $conn;
-
-        public function __construct(){
-            $db = new Database();
-            $this->conn = $db->connect();
-
-        }
 
         public function createAppointment($appointment_date , $appointment_time , $appointment_note , $user_id) {
 
