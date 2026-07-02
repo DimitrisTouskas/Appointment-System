@@ -1,7 +1,9 @@
 <?php 
-    require_once "../app/core/Database.php";
-    require_once "../models/User.php";
-    require_once "../app/core/Controller.php";
+    require_once __DIR__ . "/../app/core/Database.php";
+    require_once __DIR__ . "/../models/User.php";
+    require_once __DIR__ . "/../app/core/Controller.php";
+    require_once __DIR__ . "/../app/core/Auth.php";
+    
     
     class AuthController extends Controller{
         private ?string  $username=NULL;
@@ -107,8 +109,8 @@ private function validEmail(): bool
 }
 
 public function loginCheck()
-{
-    if (isset($_SESSION["User_id"])){
+{       
+    if (Auth::isLoggedIn()){
         $this->redirect("/appointment-system/appointments/list.php");
     }
 }

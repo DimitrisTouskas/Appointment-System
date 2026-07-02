@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php
+session_start();
+require_once __DIR__ . "/../../controllers/AuthController.php";
+$auth = new AuthController(email: '', password: '');
+$auth->loginCheck();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

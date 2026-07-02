@@ -3,6 +3,8 @@
 > Χρόνοι: για tasks που ήταν ήδη ολοκληρωμένα όταν ξεκίνησε το tracking, οι χρόνοι είναι **χοντρικές εκτιμήσεις** (όχι πραγματικά timestamps). Από εδώ και πέρα, νέα tasks θα καταγράφονται με πραγματική ώρα έναρξης/ολοκλήρωσης.
 
 ## Auth / Register
+- [x] require_once "../..." (χωρίς __DIR__) σε controllers/AppointmentController.php, AuthController.php, models/User.php, Appointment.php (12 γραμμές συνολικά) — έσπαγε όταν το ίδιο αρχείο φορτωνόταν από entry point σε διαφορετικό βάθος φακέλου (π.χ. views/auth/login.php αντί για auth/login.php), γιατί τα relative paths υπολογίζονται σχετικά με το directory του πρώτου-καλούμενου script, όχι του αρχείου που περιέχει το require — εκτίμηση: ~25 λεπτά
+- [x] AuthController::loginCheck() ήταν ορισμένο αλλά ποτέ δεν καλούνταν πουθενά — ήδη συνδεδεμένος χρήστης έβλεπε ξανά τη φόρμα login/register αντί να γίνεται redirect στο list.php. Καλείται πλέον στην αρχή των views/auth/login.php και register.php — εκτίμηση: ~20 λεπτά
 - [x] views/auth/login.php + views/auth/register.php: έλειπε session_start() στην κορυφή, το csrf_token ποτέ δεν αποθηκευόταν πραγματικά ("Undefined array key csrf_token") — εκτίμηση: ~20 λεπτά
 - [x] views/auth/register.php: security_token input ήταν εκτός `<form>` (ίδιο bug με το login.php που είχαμε βρει νωρίτερα) — εκτίμηση: ~10 λεπτά
 - [x] AuthController constructor args σε λάθος σειρά στο register.php (fixed με named arguments) — εκτίμηση: ~15 λεπτά
@@ -31,7 +33,8 @@
 - [x] Deprecation: htmlspecialchars() με null σε appointment['notes'] (list.php, edit.php) — εκτίμηση: ~15 λεπτά
 
 ## Αρχιτεκτονική (χαμηλότερη προτεραιότητα)
-- [ ] Άδεια αρχεία (σκόπιμα, στο πλάνο να υλοποιηθούν — όχι dead code): app/core/Auth.php, controllers/DashboardController.php, dashboard.php, database/seed.sql, views/appointments/delete.php, views/layout/footer.php
+- [ ] Άδεια αρχεία (σκόπιμα, στο πλάνο να υλοποιηθούν — όχι dead code): controllers/DashboardController.php, dashboard.php, database/seed.sql, views/appointments/delete.php, views/layout/footer.php
+- [x] app/core/Auth.php: static `Auth::isLoggedIn()` helper, εξαλείφει duplicate `isset($_SESSION["User_id"])` σε sessionCheck()/loginCheck() — εκτίμηση: ~25 λεπτά
 - [x] app/core/Controller.php: base class με shared `redirect($path)` helper· AppointmentController/AuthController κάνουν `extends Controller`, αντικατέστησαν τα διάσπαρτα header()+exit() με `$this->redirect(...)` — εκτίμηση: ~30 λεπτά
 - [x] app/core/Model.php: base class με shared `mysqli $conn` property + constructor· User.php/Appointment.php κάνουν πλέον `extends Model`, χωρίς δικό τους constructor (DRY, inheritance) — εκτίμηση: ~30 λεπτά
 - [ ] dashboard.php: αρχική σελίδα με νέα από εξωτερικό News API (NewsAPI.org, server-side κλήση) — σχεδιάστηκε mockup: navbar + grid 3x2 από κάρτες ειδήσεων (εικόνα, category badge, τίτλος, περιγραφή, πηγή, link). Σημείωση σχεδίασης: background color πιο σκούρο ώστε να ταιριάζει με το navbar

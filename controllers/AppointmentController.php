@@ -1,7 +1,8 @@
 <?php
-    require_once "../app/core/Database.php";
-    require_once "../models/Appointment.php";
-    require_once "../app/core/Controller.php";
+    require_once __DIR__ . "/../app/core/Database.php";
+    require_once __DIR__ . "/../models/Appointment.php";
+    require_once __DIR__ . "/../app/core/Controller.php";
+    require_once __DIR__ . "/../app/core/Auth.php";
 
     class AppointmentController extends Controller {
         private ?string $appointment_date = NULL;
@@ -34,8 +35,8 @@
     }
     private function sessionCheck()
     {
-        if (!isset($_SESSION["User_id"])){
-            $this->redirect("/appointment-system/auth/login.php");
+        if (!Auth::isLoggedIn()){
+            $this->redirect("appointment-system/views/auth/login.php");
         }
     }
 
