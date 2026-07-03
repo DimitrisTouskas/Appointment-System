@@ -14,4 +14,17 @@
         echo("Invalid request");
         }
     }
+
+     if($_SERVER["REQUEST_METHOD"]==="GET"){
+        $appointment_id = $_GET['appointment_id']??'';
+
+        $deleteAppointment = new AppointmentController();
+        $appointment = $deleteAppointment->findById($appointment_id);
+        if($appointment!= NULL){
+        require __DIR__ . "/../views/appointments/delete.php";
+        }else{
+        header("Location: /appointment-system/appointments/list.php");
+        exit();
+        }
+    }
 ?>

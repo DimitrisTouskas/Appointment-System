@@ -25,10 +25,9 @@
                 <td><?= htmlspecialchars($appointment['appointment_date']) ?></td>
                 <td><?= htmlspecialchars($appointment['appointment_time']) ?></td>
                 <td><?= htmlspecialchars($appointment['notes'] ?? '') ?></td>
-                <td><form action="delete.php" method="POST">
+                <td><form action="delete.php" method="GET">
                         <button>Delete</button>
                         <input type="hidden" id="appointment_id" name="appointment_id" value="<?= htmlspecialchars($appointment['id']); ?>" />
-                        <input type="hidden" name="security_token" value="<?php echo $_SESSION['csrf_token']; ?>" >
                     </form>
                     <form action="edit.php" method = "GET" >
                         <button>Edit</button>
