@@ -1,4 +1,8 @@
-<?php session_start();?>
+<?php session_start([
+    'cookie_httponly' => true,
+    'cookie_samesite' => 'Lax',
+]);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

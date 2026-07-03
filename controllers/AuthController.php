@@ -45,6 +45,10 @@
         return "Passwords do not match";
     }
 
+    if(!$this->validPasswordLenght()){
+        return "Too few characters on password need to add more";
+    }
+
     // 2. BUSINESS RULES (Model check)
     $db = new Database;
     $connection = $db->connect();
@@ -106,6 +110,14 @@ private function emptyInputRegister(): bool
 private function validEmail(): bool
 {
     return filter_var($this->email, FILTER_VALIDATE_EMAIL);
+}
+
+private function validPasswordLenght(): bool
+{   if(mb_strlen($this->password)> 7 ){
+    return true;
+}else{
+    return false;
+}
 }
 
 public function loginCheck()

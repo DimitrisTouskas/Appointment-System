@@ -1,5 +1,8 @@
 <?php
-    session_start();
+    session_start([
+    'cookie_httponly' => true,
+    'cookie_samesite' => 'Lax',
+]);
     require_once __DIR__ . "/../controllers/AppointmentController.php";
     
     if($_SERVER["REQUEST_METHOD"]==="POST"){

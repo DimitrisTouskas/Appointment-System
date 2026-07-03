@@ -1,5 +1,8 @@
-<?php session_start(); 
-require_once  "/../../controllers/AuthController.php"; 
+<?php session_start([
+    'cookie_httponly' => true,
+    'cookie_samesite' => 'Lax',
+]);
+require_once __DIR__ . "/../../controllers/AuthController.php"; 
 $auth = new AuthController(email: '', password: '');
 $auth->loginCheck();
 ?>
