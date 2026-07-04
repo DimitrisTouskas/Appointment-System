@@ -119,6 +119,9 @@ private function validPasswordLenght(): bool
     return false;
 }
 }
+private function isAccountLocked($foundUser):bool{
+    return $foundUser['locked_until'] !== null && strtotime($foundUser['locked_until']) > time();
+}
 
 public function loginCheck()
 {       
@@ -129,10 +132,10 @@ public function loginCheck()
 
 public function login()
 {  
-
     if ($this->emptyInputLogin()) {
         return "All fields are required";
     }
+    
     if (!$this->validEmail()) {
         return "Invalid email format";
     }
@@ -140,19 +143,29 @@ public function login()
     $connection = $db->connect();
     $user = new User($connection);
     $foundUser = $user -> findByEmail($this-> email);
-
+    
     if($foundUser!== Null){
         $passCheck = password_verify($this->password , $foundUser['password']);
     }else {
         echo "User not found. Maybe wanna create account";
         exit();
     }
+
+    if($this->isAccountLocked($foundUser)){
+        echo "Your account is locked. Try again later.";
+        exit();
+    }
+
     if ($passCheck===true){
         $_SESSION["User_id"] = $foundUser['id'];
+        $user->resetFailedAttempts($foundUser['id']);
         $this->redirect("/appointment-system/appointments/list.php");
     }else{
         echo "Wrong credentials try again";
+        $user->incrementFailedAttempts($foundUser['id']);
+        if($foundUser['failed_login_attempts'] + 1 >= 5){
+            $user->lockAccount($foundUser['id'], 15);
+        }
     }
 }
-
 }

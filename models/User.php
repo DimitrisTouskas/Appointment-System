@@ -60,6 +60,31 @@
 
         }
 
+        public function incrementFailedAttempts($userId){
+            $sql = "UPDATE users SET failed_login_attempts = failed_login_attempts + 1 WHERE id= ?";
+            $stmt = $this->conn -> prepare($sql);
+
+            $stmt -> bind_param('i' , $userId);
+            $stmt ->execute();
+            return true;
+        }
+
+        public function lockAccount($userId, $minutes){
+            $sql = "UPDATE users SET locked_until = DATE_ADD(NOW() , INTERVAL ? MINUTE) WHERE id = ?";
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bind_param('ii' , $minutes , $userId);
+            $stmt -> execute();
+            return true;
+        }
+        public function resetFailedAttempts($userId){
+            $sql = "UPDATE users SET failed_login_attempts = 0 , locked_until = NULL WHERE ID=?";
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bind_param('i' , $userId);
+            $stmt ->execute();
+            return true;
+        }
     }
 
 ?>
