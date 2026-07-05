@@ -70,15 +70,19 @@
         $this->redirect("/appointment-system/appointments/list.php");
         }   
 
-    public function index(){
+    public function index(int $page = 1){
         $this->sessionCheck();
-        
         $db = new Database;
         $connection = $db->connect();
         $list = new Appointment($connection);
+        $perPage = 5; 
+        $offset =($page - 1) * $perPage;
 
-        $view_list = $list -> viewAppointments($_SESSION['User_id']);
-        return $view_list;
+        $view_list = $list -> viewAppointments($_SESSION['User_id'] , $perPage , $offset );
+        $countResult = $list->countAppointments($_SESSION['User_id']);
+        $totalCount = $countResult['TOTAL'];
+        $totalPages = ceil($totalCount/$perPage);
+        return ['appointments' => $view_list, 'currentPage' => $page, 'totalPages' => $totalPages];
     }
     public function delete($appointment_id){
         $this->sessionCheck();

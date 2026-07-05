@@ -26,16 +26,27 @@
             return true;
         }
 
+         public function countAppointments($user_id){
+            $sql = "SELECT COUNT(*) AS TOTAL FROM appointments WHERE user_id = ?";
+            $stmt = $this->conn->prepare($sql);
 
-        public function viewAppointments($user_id){
-            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM appointments WHERE user_id = ?  ORDER BY appointment_time asc";
+            $stmt -> bind_param('i' , $user_id);
+            $stmt -> execute();
+            $result = $stmt -> get_result();
+            $assoc = $result->fetch_assoc();
+            return $assoc;
+         }
+
+
+        public function viewAppointments($user_id , $limit , $offset){
+            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM appointments WHERE user_id = ? ORDER BY appointment_time asc LIMIT ? OFFSET ? ";
             $stmt = $this->conn->prepare($sql);
             
             if(!$stmt){
             error_log("Prepare failed: " . $this->conn->error);
             return [];
             }
-            $stmt -> bind_param('i' , $user_id);
+            $stmt -> bind_param('iii' , $user_id , $limit , $offset);
             $stmt ->execute();
             $result = $stmt->get_result();
             $assoc = $result->fetch_all(MYSQLI_ASSOC);

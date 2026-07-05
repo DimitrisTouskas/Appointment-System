@@ -1,4 +1,6 @@
 <?php /** @var array $appointments */ ?>
+<?php /** @var int $currentPage */ ?>
+<?php /** @var int $totalPages */ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +40,12 @@
             <?php endforeach; ?>
         </tbody>
         </table>
+        <?php if($currentPage > 1): $prevPage = $currentPage - 1; ?>
+            <a href="list.php?page=<?= $prevPage ?>">Previous</a>        
+        <?php endif;?>
+        <?php if($currentPage < $totalPages): $nextPage = $currentPage + 1; ?>
+            <a href="list.php?page=<?= $nextPage ?>">Next</a>
+        <?php endif;?>
     </div>
 </body>
 </html>

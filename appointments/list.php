@@ -1,14 +1,21 @@
 <?php
     require_once __DIR__ . '/../vendor/autoload.php';
     use App\Controllers\AppointmentController;
-    
+
     session_start([
     'cookie_httponly' => true,
     'cookie_samesite' => 'Lax',
 ]);
+   if($_SERVER["REQUEST_METHOD"]==="GET"){
+    $page = (int)( $_GET['page']?? 1 );
+   }
 
     $controller = new AppointmentController();
-    $appointments = $controller->index();
+    $result = $controller ->index($page);
+
+    $appointments = $result['appointments'];
+    $currentPage = $result['currentPage'];
+    $totalPages = $result['totalPages'];
   
     
     require __DIR__ . "/../views/appointments/list.php";   
