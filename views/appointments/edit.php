@@ -1,4 +1,4 @@
-<?php /** @var array $appointments */ ?>
+<?php /** @var array $appointment */ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@
 <body>
     <main>
     <div> 
-        <form action="/appointment-system/appointments/edit.php" method="POST" onsubmit="return validateForm()">
+        <form action="/appointment-system/public/appointments/edit" method="POST" onsubmit="return validateForm()">
             <label for="date" class="form-label" >Appointment Date</label>
             <input type="date" name="appointment_date" id="appointment_date" class="form-control" value="<?= htmlspecialchars($appointment['appointment_date']) ?>">
             <label for="time" class="form-label">Appointment Time</label>

@@ -1,8 +1,3 @@
-<?php session_start([
-    'cookie_httponly' => true,
-    'cookie_samesite' => 'Lax',
-]);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +10,7 @@
 <body>
     <main>
     <div> 
-        <form action="../../appointments/create.php" method="POST" onsubmit="return validateForm()">
+        <form action="/appointment-system/public/appointments/create" method="POST" onsubmit="return validateForm()">
             <label for="date" class="form-label" >Appointment Date</label>
             <input type="date" name="appointment_date" id="appointment_date" class="form-control">
             <label for="time" class="form-label">Appointment Time</label>

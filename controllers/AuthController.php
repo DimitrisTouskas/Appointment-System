@@ -126,7 +126,7 @@ private function isAccountLocked($foundUser):bool{
 public function loginCheck()
 {       
     if (Auth::isLoggedIn()){
-        $this->redirect("/appointment-system/appointments/list.php");
+        $this->redirect("/appointment-system/public/appointments");
     }
 }
 
@@ -159,7 +159,7 @@ public function login()
     if ($passCheck===true){
         $_SESSION["User_id"] = $foundUser['id'];
         $user->resetFailedAttempts($foundUser['id']);
-        $this->redirect("/appointment-system/appointments/list.php");
+        $this->redirect("/appointment-system/public/appointments");
     }else{
         echo "Wrong credentials try again";
         $user->incrementFailedAttempts($foundUser['id']);

@@ -1,11 +1,15 @@
 <?php
-    require_once __DIR__ . '/../vendor/autoload.php';
     use App\Controllers\AppointmentController;
-    
-    session_start([
-    'cookie_httponly' => true,
-    'cookie_samesite' => 'Lax',
-]);
+    use App\Core\Auth;
+
+     if ($_SERVER["REQUEST_METHOD"]==="GET"){
+        if(Auth::isLoggedIn()){
+            require __DIR__ . "/../views/appointments/create.php";
+        }else{
+            header("Location: /appointment-system/public/login");
+            exit();
+     }
+     }
 
     if ($_SERVER["REQUEST_METHOD"]==="POST"){
         $appointment_date = $_POST["appointment_date"]??'';

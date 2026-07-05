@@ -31,8 +31,8 @@
           Appointments
         </a>
         <div class="dropdown-menu"  aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/appointment-system/appointments/list.php">Appointment list</a>
-          <a class="dropdown-item" href="/appointment-system/appointments/create.php">Create new Appointment</a>
+          <a class="dropdown-item" href="/appointment-system/public/appointments">Appointment list</a>
+          <a class="dropdown-item" href="/appointment-system/public/appointments/create">Create new Appointment</a>
         </div>
       </li>
       <li class="nav-item">
@@ -53,7 +53,7 @@
         <i class="bi bi-person-circle text-white fs-4"></i>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-danger" href="/appointment-system/auth/logout.php">Logout</a>
+        <a class="nav-link text-danger" href="/appointment-system/public/logout">Logout</a>
     </li>
 </ul>
 </div>

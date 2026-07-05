@@ -1,15 +1,3 @@
-<?php
-    require_once __DIR__ . '/../../vendor/autoload.php';
-    use App\Controllers\AuthController;
-    
-session_start([
-    'cookie_httponly' => true,
-    'cookie_samesite' => 'Lax',
-]);
-
-$auth = new AuthController(email: '', password: '');
-$auth->loginCheck();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +9,7 @@ $auth->loginCheck();
 </head>
 <body>
 <main>
-    <form name="loginForm" action="../../auth/login.php" method="POST">
+    <form name="loginForm" action="/appointment-system/public/login" method="POST">
         <h1> Login </h1>
         <div>
             <label for="email">Email:</label>
@@ -32,11 +20,11 @@ $auth->loginCheck();
             <input type="password" name="password" id="password">
         </div>
         <button type="submit">Login</button>
-        <footer> Didnt have an account? <a href="register.php">Register Here</a></footer>
+        <footer> Didnt have an account? <a href="/appointment-system/public/register">Register Here</a></footer>
         <input type="hidden" id="security_token" name="security_token" value="<?php $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
         echo $_SESSION['csrf_token']; ?>" />
     </form>
 </main>
-<script src="../../public/assets/js/login.js"></script>
+<script src="/appointment-system/public/assets/js/login.js"></script>
 </body>
 </html>

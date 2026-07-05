@@ -1,16 +1,14 @@
 <?php
-    require_once __DIR__ . '/../vendor/autoload.php';
     use App\Controllers\AuthController;
-    
-    session_start([
-    'cookie_httponly' => true,
-    'cookie_samesite' => 'Lax',
-]);
 
-    if (isset($_SESSION['User_id'])) {
-    header("Location: /appointment-system/appointments/list.php");
-    exit();
-}
+      if($_SERVER["REQUEST_METHOD"]==="GET"){
+        if (isset($_SESSION['User_id'])) {
+            header("Location: /appointment-system/public/appointments");
+            exit();
+        }
+        require __DIR__ . "/../views/auth/register.php";
+    }
+
     if($_SERVER["REQUEST_METHOD"]=== "POST"){
         $email = $_POST['email']??'';
         $password = $_POST['password']??'';

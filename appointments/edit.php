@@ -1,11 +1,5 @@
 <?php
-    require_once __DIR__ . '/../vendor/autoload.php';
     use App\Controllers\AppointmentController;
-    
-    session_start([
-    'cookie_httponly' => true,
-    'cookie_samesite' => 'Lax',
-]);
     
     if($_SERVER["REQUEST_METHOD"]==="POST"){
         $appointment_id = $_POST['appointment_id']??'';
@@ -17,7 +11,7 @@
         if($_POST['security_token']=== $_SESSION['csrf_token']){
         $editAppointmentPush = new AppointmentController($appointment_date, $appointment_time, $appointment_notes, $appointment_status);
         $results = $editAppointmentPush->update($appointment_id);
-        header("Location: /appointment-system/appointments/list.php");
+        header("Location: /appointment-system/public/appointments");
     }else
         echo("Invalid request");
     }
@@ -32,7 +26,7 @@
         if($appointment!= NULL){
         require __DIR__ . "/../views/appointments/edit.php";
         }else{
-        header("Location: /appointment-system/appointments/list.php");
+        header("Location: /appointment-system/public/appointments");
         exit();
         }
     }

@@ -1,14 +1,3 @@
-<?php
-    require_once __DIR__ . '/../../vendor/autoload.php';
-    use App\Controllers\AuthController;
-    session_start([
-    'cookie_httponly' => true,
-    'cookie_samesite' => 'Lax',
-]);
-
-$auth = new AuthController(email: '', password: '');
-$auth->loginCheck();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +9,7 @@ $auth->loginCheck();
 </head>
 <body>
 <main>
-    <form name="registerForm" action="../../auth/register.php" method="POST">
+    <form name="registerForm" action="/appointment-system/public/register" method="POST">
         <h1> Sign Up </h1>
         <div>
             <label for="username">Username:</label>
@@ -53,11 +42,26 @@ $auth->loginCheck();
             </label>
         </div>
         <button type="submit">Register</button>
-        <footer> Already member? <a href="login.php">Login Here</a></footer>
+        <footer> Already member? <a href="/appointment-system/public/login">Login Here</a></footer>
         <input type="hidden" id="security_token" name="security_token" value="<?php $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
             echo $_SESSION['csrf_token']; ?>" />
     </form>
 </main>
-<script src="../../public/assets/js/register.js"></script>
+<script src="/appointment-system/public/assets/js/register.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+//     require_once __DIR__ . '/../../vendor/autoload.php';
+//     use App\Controllers\AuthController;
+//     session_start([
+//     'cookie_httponly' => true,
+//     'cookie_samesite' => 'Lax',
+// ]);
+
+// $auth = new AuthController(email: '', password: '');
+// $auth->loginCheck();

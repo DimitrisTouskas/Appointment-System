@@ -37,7 +37,7 @@
     private function sessionCheck()
     {
         if (!Auth::isLoggedIn()){
-            $this->redirect("appointment-system/views/auth/login.php");
+            $this->redirect("/appointment-system/public/login");
         }
     }
 
@@ -67,7 +67,7 @@
         $appointment = new Appointment($connection);
         
         $newAppointment = $appointment -> createAppointment($this->appointment_date ,$this-> appointment_time , $this->appointment_notes , $_SESSION['User_id'] );
-        $this->redirect("/appointment-system/appointments/list.php");
+        $this->redirect("/appointment-system/public/appointments");
         }   
 
     public function index(int $page = 1){

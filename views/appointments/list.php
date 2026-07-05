@@ -27,11 +27,11 @@
                 <td><?= htmlspecialchars($appointment['appointment_date']) ?></td>
                 <td><?= htmlspecialchars($appointment['appointment_time']) ?></td>
                 <td><?= htmlspecialchars($appointment['notes'] ?? '') ?></td>
-                <td><form action="delete.php" method="GET">
+                <td><form action="/appointment-system/public/appointments/delete" method="GET">
                         <button>Delete</button>
                         <input type="hidden" id="appointment_id" name="appointment_id" value="<?= htmlspecialchars($appointment['id']); ?>" />
                     </form>
-                    <form action="edit.php" method = "GET" >
+                    <form action="/appointment-system/public/appointments/edit" method = "GET" >
                         <button>Edit</button>
                         <input type="hidden" id="appointment_id" name="appointment_id" value="<?= htmlspecialchars($appointment['id']) ?>" />
                     </form>
@@ -41,10 +41,10 @@
         </tbody>
         </table>
         <?php if($currentPage > 1): $prevPage = $currentPage - 1; ?>
-            <a href="list.php?page=<?= $prevPage ?>">Previous</a>        
+            <a href="/appointment-system/public/appointments?page=<?= $prevPage ?>">Previous</a>        
         <?php endif;?>
         <?php if($currentPage < $totalPages): $nextPage = $currentPage + 1; ?>
-            <a href="list.php?page=<?= $nextPage ?>">Next</a>
+            <a href="/appointment-system/public/appointments?page=<?= $nextPage ?>">Next</a>
         <?php endif;?>
     </div>
 </body>
