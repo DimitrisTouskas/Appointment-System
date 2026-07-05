@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://phptutorial.net/app/css/style.css">
-
-    <title>Login</title>
-</head>
-<body>
+<?php require __DIR__ . '/../layout/header.php'; ?>
 <main>
     <form name="loginForm" action="/appointment-system/public/login" method="POST">
         <h1> Login </h1>
@@ -26,5 +17,4 @@
     </form>
 </main>
 <script src="/appointment-system/public/assets/js/login.js"></script>
-</body>
-</html>
+<?php require __DIR__ . '/../layout/footer.php'; ?>

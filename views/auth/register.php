@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://phptutorial.net/app/css/style.css">
-
-    <title>Register</title>
-</head>
-<body>
+<?php require __DIR__ . '/../layout/header.php'; ?>
 <main>
     <form name="registerForm" action="/appointment-system/public/register" method="POST">
         <h1> Sign Up </h1>
@@ -48,20 +39,4 @@
     </form>
 </main>
 <script src="/appointment-system/public/assets/js/register.js"></script>
-</body>
-</html>
-
-
-
-
-
-
-//     require_once __DIR__ . '/../../vendor/autoload.php';
-//     use App\Controllers\AuthController;
-//     session_start([
-//     'cookie_httponly' => true,
-//     'cookie_samesite' => 'Lax',
-// ]);
-
-// $auth = new AuthController(email: '', password: '');
-// $auth->loginCheck();
+<?php require __DIR__ . '/../layout/footer.php'; ?>

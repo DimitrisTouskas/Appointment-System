@@ -1,3 +1,4 @@
+<?php use App\Core\Auth; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +9,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../public/assets/css/mainStyle.css">
+    <link rel="stylesheet" href="/appointment-system/public/assets/css/mainStyle.css">
     
     <title>Appointment-System</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-0">
+  <a class="navbar-brand bi bi-calendar-check nav-link active" href="#">Appointement-System</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -25,7 +26,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
-       </li>
+      <?php if(Auth::isLoggedIn()): ?>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Appointments
@@ -35,6 +36,7 @@
           <a class="dropdown-item" href="/appointment-system/public/appointments/create">Create new Appointment</a>
         </div>
       </li>
+      <?php endif; ?>
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
@@ -48,15 +50,22 @@
         <input class ="search-input" type="search" placeholder="Search">
       </div>
     </form>
-   <ul class="navbar-nav ms-auto">
+    <ul class="navbar-nav">
+    <?php if(Auth::isLoggedIn()): ?>
     <li class="nav-item">
         <i class="bi bi-person-circle text-white fs-4"></i>
     </li>
     <li class="nav-item">
         <a class="nav-link text-danger" href="/appointment-system/public/logout">Logout</a>
     </li>
-</ul>
+    <?php else: ?>
+      <li class="nav-item">
+        <a class="nav-link text-danger" href="/appointment-system/public/login">Login</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-danger" href="/appointment-system/public/register">Register</a>
+    </li>
+    <?php endif; ?>
+  </ul>  
 </div>
 </nav>
-</body>
-</html>

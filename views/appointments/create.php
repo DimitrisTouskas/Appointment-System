@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-
-    <title>Document</title>
-</head>
-<body>
+<?php require __DIR__ . '/../layout/header.php'; ?>
     <main>
     <div> 
         <form action="/appointment-system/public/appointments/create" method="POST" onsubmit="return validateForm()">
@@ -25,5 +16,4 @@
     </div>
     </main>
 <script src="../../public/assets/js/create-appointment.js"></script>
-</body>
-</html>
+<?php require __DIR__ . '/../layout/footer.php'; ?>

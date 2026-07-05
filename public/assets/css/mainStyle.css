@@ -1,21 +1,29 @@
-  nav ul {
+.navbar-nav.mr-auto {
     display: inline-block;
     list-style-type: none;
-    margin-left:auto;
-    margin-right: 100px;
-    display: inline-block;
+    margin-left: 570px;
+    margin-right: 600px;
     justify-content: space-between;
 }
 
+
+.navbar-nav.mr-auto .nav-item {
+    margin: 0 50px;
+}
+
+
 .search {
-    width: max-content;
+    width: 350px;
     display: flex;
     align-items: center;
-    padding: 14px;
+    padding: 8px;
     border-radius: 28px;
     background: #f6f6f6;
-    margin-left:auto;
-    margin-right: 100px;
+    margin-right: 20px;
+}
+
+.navbar-collapse form {
+    margin-left: auto;
 }
 
 .search-input {
