@@ -1,9 +1,10 @@
 <?php
     // include "../appointment-system/config/config.php";
+    namespace App\Core;
     class Database{
 
         private array $config;
-        public mysqli $conn;
+        public \mysqli $conn;
 
         public function __construct()
         {
@@ -11,7 +12,7 @@
         }
 
         public function connect(){
-            $this->conn = new mysqli(
+            $this->conn = new \mysqli(
                 $this-> config['host'],
                 $this-> config['username'],
                 $this->config['password'],

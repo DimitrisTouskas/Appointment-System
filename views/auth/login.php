@@ -1,9 +1,12 @@
 <?php
+    require_once __DIR__ . '/../../vendor/autoload.php';
+    use App\Controllers\AuthController;
+    
 session_start([
     'cookie_httponly' => true,
     'cookie_samesite' => 'Lax',
 ]);
-require_once __DIR__ . "/../../controllers/AuthController.php";
+
 $auth = new AuthController(email: '', password: '');
 $auth->loginCheck();
 ?>

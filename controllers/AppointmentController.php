@@ -1,8 +1,9 @@
 <?php
-    require_once __DIR__ . "/../app/core/Database.php";
-    require_once __DIR__ . "/../models/Appointment.php";
-    require_once __DIR__ . "/../app/core/Controller.php";
-    require_once __DIR__ . "/../app/core/Auth.php";
+    namespace App\Controllers;
+    use App\Core\Auth;
+    use App\Models\Appointment;
+     use App\Core\Controller;
+    use App\Core\Database;
 
     class AppointmentController extends Controller {
         private ?string $appointment_date = NULL;

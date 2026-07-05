@@ -1,6 +1,6 @@
 <?php
-    require_once __DIR__ . "/../app/core/Database.php";
-    require_once __DIR__ . "/../app/core/Model.php";
+    namespace App\Models;
+    use App\Core\Model;
 
     class User extends Model {
 

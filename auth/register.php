@@ -1,9 +1,12 @@
 <?php
+    require_once __DIR__ . '/../vendor/autoload.php';
+    use App\Controllers\AuthController;
+    
     session_start([
     'cookie_httponly' => true,
     'cookie_samesite' => 'Lax',
 ]);
-    require_once __DIR__ . "/../controllers/AuthController.php";
+
     if (isset($_SESSION['User_id'])) {
     header("Location: /appointment-system/appointments/list.php");
     exit();

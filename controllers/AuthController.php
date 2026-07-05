@@ -1,9 +1,9 @@
 <?php 
-    require_once __DIR__ . "/../app/core/Database.php";
-    require_once __DIR__ . "/../models/User.php";
-    require_once __DIR__ . "/../app/core/Controller.php";
-    require_once __DIR__ . "/../app/core/Auth.php";
-    
+    namespace App\Controllers;
+    use App\Core\Controller;
+    use App\Core\Database;
+    use App\Core\Auth;
+    use App\Models\User;
     
     class AuthController extends Controller{
         private ?string  $username=NULL;
