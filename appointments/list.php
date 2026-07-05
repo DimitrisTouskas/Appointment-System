@@ -6,9 +6,7 @@
     'cookie_httponly' => true,
     'cookie_samesite' => 'Lax',
 ]);
-   if($_SERVER["REQUEST_METHOD"]==="GET"){
     $page = (int)( $_GET['page']?? 1 );
-   }
 
     $controller = new AppointmentController();
     $result = $controller ->index($page);
