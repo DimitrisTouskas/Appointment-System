@@ -24,3 +24,34 @@ function validateForm(){
     }
     return true;
 }
+
+
+let formGrapper = document.getElementById('createForm')
+let formListener = formGrapper.addEventListener("submit" , onCreateSubmit);
+
+
+async function onCreateSubmit(event){
+    event.preventDefault();
+    if(validateForm()=== false){
+        return false;
+    }else{
+       let tokenRecieved = document.getElementById("security_token").value;
+       let dateRecieved = document.getElementById("appointment_date").value;
+       let timeRecieved = document.getElementById("appointment_time").value;
+       let notesRecieved = document.getElementById("appointment_notes").value;
+       
+       let body = new URLSearchParams({appointment_time:timeRecieved, appointment_date:dateRecieved, security_token:tokenRecieved , appointment_notes:notesRecieved});
+       
+       let res = await fetch('/appointment-system/public/appointments/create' , {method:'POST' , body});
+       let result = await res.json();
+
+       if(result['status']=== "success"){
+        window.location = '/appointment-system/public/appointments';
+
+       }else{
+        alert(result.message);
+       }
+
+
+    }
+}

@@ -8,10 +8,15 @@
     if($_POST['security_token']=== $_SESSION['csrf_token']){
         $deleteAppointment = new AppointmentController();
         $results = $deleteAppointment->delete($appointment_id);
-        header("Location: /appointment-system/public/appointments");
     }else{
-        echo("Invalid request");
+        $results = ["status" => "error",
+            "message" => "Invalid request",
+            "code"=> 403
+            ];  
         }
+        header('Content-Type: application/json');
+        http_response_code($results['code']);
+        echo json_encode($results);
     }
 
      if($_SERVER["REQUEST_METHOD"]==="GET"){

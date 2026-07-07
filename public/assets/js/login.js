@@ -1,7 +1,8 @@
 function validateForm(){
-    let validationUsername = document.getElementById("username").value.trim();
-    if (validationUsername ==""){
-        alert("Username cannot be empty");
+
+    let validationEmail = document.getElementById("email").value.trim();
+    if (validationEmail ==""){
+        alert("Email cannot be empty");
         return false;
     }
     let validationPassword = document.getElementById("password").value.trim();
@@ -9,6 +10,36 @@ function validateForm(){
         alert("Password cannot be empty");
         return false;
     }
-
     return true;
+}
+
+let formGrapper = document.getElementById('loginForm')
+let formListener = formGrapper.addEventListener("submit" , onLoginSubmit);
+
+
+async function onLoginSubmit(event){
+    event.preventDefault();
+    if(validateForm()=== false){
+        return false;
+    }else{
+       let tokenRecieved = document.getElementById("security_token").value;
+       let emailRecieved = document.getElementById("email").value;
+       let passwordRecieved = document.getElementById("password").value;
+       
+       let body = new URLSearchParams({email:emailRecieved, password:passwordRecieved, security_token:tokenRecieved});
+       
+       let res = await fetch('/appointment-system/public/login' , {method:'POST' , body});
+       let result = await res.json();
+
+       if(result['status']=== "success"){
+        window.location = '/appointment-system/public/appointments';
+
+       }else{
+        alert(result.message);
+       }
+
+
+    }
+    
+
 }

@@ -22,10 +22,17 @@
     if($_POST['security_token']=== $_SESSION['csrf_token']){   
         $result = $auth->register();
         
-        echo json_encode($result);
         unset($_SESSION['csrf_token']);
-        }else
-        echo("Invalid request");
+        }else{
+        $result = ["status" => "error",
+            "message" => "Invalid request",
+            "code"=> 403
+            ];
+            
+        }
+        header('Content-Type: application/json');
+            http_response_code($result['code']);
+            echo json_encode($result);
     }
     
 ?>

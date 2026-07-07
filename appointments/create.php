@@ -20,9 +20,15 @@
         $createAppointment = new AppointmentController($appointment_date , $appointment_time , $appointment_notes);
         $result = $createAppointment->create();
     
-        echo json_encode($result);
         unset($_SESSION['csrf_token']);
-        }else
-            echo("Invalid request");
+        }else{
+            $result = ["status" => "error",
+            "message" => "Invalid request",
+            "code"=> 403
+            ];
+        }
+        header('Content-Type: application/json');
+            http_response_code($result['code']);
+            echo json_encode($result);
     }
 ?>

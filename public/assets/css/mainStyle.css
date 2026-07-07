@@ -1,14 +1,14 @@
 .navbar-nav.mr-auto {
     display: inline-block;
     list-style-type: none;
-    margin-left: 570px;
-    margin-right: 600px;
+    margin-left: 500px;
+    margin-right: 500px;
     justify-content: space-between;
 }
 
 
 .navbar-nav.mr-auto .nav-item {
-    margin: 0 50px;
+    margin: 0 20px;
 }
 
 

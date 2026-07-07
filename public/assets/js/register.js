@@ -27,3 +27,37 @@ function validateForm(){
 
     return true;
 }
+
+let formGrapper = document.getElementById('registerForm')
+let formListener = formGrapper.addEventListener("submit" , onRegisterSubmit);
+
+
+async function onRegisterSubmit(event){
+    event.preventDefault();
+    if(validateForm()=== false){
+        return false;
+    }else{
+       let usernameRecieved = document.getElementById("username").value;
+       let fistnameRecieved = document.getElementById("firstname").value;
+       let lastnameRecieved = document.getElementById("lastname").value;
+       let emailRecieved = document.getElementById("email").value;
+       let passwordRecieved = document.getElementById("password").value;
+       let password2Recieved = document.getElementById("password2").value;
+       let tokenRecieved = document.getElementById("security_token").value;
+       
+       let body = new URLSearchParams({username:usernameRecieved,firstname:fistnameRecieved , lastname:lastnameRecieved,
+         email:emailRecieved, password:passwordRecieved,password2:password2Recieved, security_token:tokenRecieved});
+       
+       let res = await fetch('/appointment-system/public/register' , {method:'POST' , body});
+       let result = await res.json();
+
+       if(result['status']=== "success"){
+        window.location = '/appointment-system/public/appointments';
+
+       }else{
+        alert(result.message);
+       }
+
+
+    }
+}

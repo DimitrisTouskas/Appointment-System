@@ -1,7 +1,7 @@
 <?php require __DIR__ . '/../layout/header.php'; ?>
     <main>
     <div> 
-        <form action="/appointment-system/public/appointments/create" method="POST" onsubmit="return validateForm()">
+        <form action="/appointment-system/public/appointments/create" method="POST" id="createForm">
             <label for="date" class="form-label" >Appointment Date</label>
             <input type="date" name="appointment_date" id="appointment_date" class="form-control">
             <label for="time" class="form-label">Appointment Time</label>
@@ -15,5 +15,5 @@
         </form>
     </div>
     </main>
-<script src="../../public/assets/js/create-appointment.js"></script>
+<script src="/appointment-system/public/assets/js/create-appointment.js"></script>
 <?php require __DIR__ . '/../layout/footer.php'; ?>

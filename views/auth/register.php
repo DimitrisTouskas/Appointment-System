@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/../layout/header.php'; ?>
 <main>
-    <form name="registerForm" action="/appointment-system/public/register" method="POST">
+    <form name="registerForm" id="registerForm" action="/appointment-system/public/register" method="POST">
         <h1> Sign Up </h1>
         <div>
             <label for="username">Username:</label>

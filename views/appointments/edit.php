@@ -2,7 +2,7 @@
 <?php require __DIR__ . '/../layout/header.php'; ?>
     <main>
     <div> 
-        <form action="/appointment-system/public/appointments/edit" method="POST" onsubmit="return validateForm()">
+        <form action="/appointment-system/public/appointments/edit" method="POST" id="editForm">
             <label for="date" class="form-label" >Appointment Date</label>
             <input type="date" name="appointment_date" id="appointment_date" class="form-control" value="<?= htmlspecialchars($appointment['appointment_date']) ?>">
             <label for="time" class="form-label">Appointment Time</label>

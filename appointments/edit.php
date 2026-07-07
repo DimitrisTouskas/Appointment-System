@@ -11,11 +11,16 @@
         if($_POST['security_token']=== $_SESSION['csrf_token']){
         $editAppointmentPush = new AppointmentController($appointment_date, $appointment_time, $appointment_notes, $appointment_status);
         $results = $editAppointmentPush->update($appointment_id);
-        header("Location: /appointment-system/public/appointments");
-    }else
-        echo("Invalid request");
+        }else{
+        $results = ["status" => "error",
+            "message" => "Invalid request",
+            "code"=> 403
+            ];
+        }
+    header('Content-Type: application/json');
+    http_response_code($results['code']);
+    echo json_encode($results);
     }
-
     
 
     if($_SERVER["REQUEST_METHOD"]==="GET"){

@@ -46,20 +46,33 @@
         $this->sessionCheck();
 
         if ($this->emptyInputDate()) {
-            return "Date field are required";
+            return ["status" => "error",
+            "message" => "Date field are required!",
+            "code"=> 400
+            ];
         }
         
         if ($this->emptyInputTime()) {
-            return "Time field are required";
+            return ["status" => "error",
+            "message" => "Time field are required",
+            "code"=> 400
+            ];
         }
 
         // Validations for Date and Time
         if ($this->appointment_date < date('Y-m-d')){
-            return "Cannot accept previous date";
+            return ["status" => "error",
+            "message" => "Cannot accept previous date",
+            "code"=> 400
+            ];
         }
 
         if ($this->appointment_time < date('H:i') && $this->appointment_date == date('Y-m-d')){
-            return "Cannot set previous time";
+            return ["status" => "error",
+            "message" => "Cannot set previous time",
+            "code"=> 400
+            ];
+            
         }
 
         $db = new Database;
@@ -67,7 +80,11 @@
         $appointment = new Appointment($connection);
         
         $newAppointment = $appointment -> createAppointment($this->appointment_date ,$this-> appointment_time , $this->appointment_notes , $_SESSION['User_id'] );
-        $this->redirect("/appointment-system/public/appointments");
+        return ["status" => "success",
+            "message" => "New Appointment added successfully",
+            "code"=> 200
+            ];
+        
         }   
 
     public function index(int $page = 1){
@@ -89,15 +106,21 @@
 
         if($this->emptyInputId($appointment_id))
         {
-            return "Cannot delete this appointment";
+            return ["status" => "error",
+            "message" => "Cannot delete this appointment",
+            "code"=> 400
+            ];
+            
         }
         $db = new Database;
         $connection = $db->connect();
         $appointment = new Appointment($connection);
         
         $appointment->delete($appointment_id , $_SESSION['User_id']);
-        return true;
-    
+            return ["status" => "success",
+            "message" => "Appointment Deleted Successfully",
+            "code"=> 200
+            ];    
     }
     private function emptyInputId($appointment_id): bool
         {
@@ -107,20 +130,33 @@
     public function update($appointment_id ){
         $this->sessionCheck();
         if ($this->emptyInputDate()) {
-            return "Date field are required";
+            return ["status" => "error",
+            "message" => "Date field are required",
+            "code"=> 400
+            ];
+            
         }
         
         if ($this->emptyInputTime()) {
-            return "Time field are required";
+            return ["status" => "error",
+            "message" => "Time field are required",
+            "code"=> 400
+            ];
         }
 
         // Validations for Date and Time
         if ($this->appointment_date < date('Y-m-d')){
-            return "Cannot accept previous date";
+            return ["status" => "error",
+            "message" => "Cannot accept previous date",
+            "code"=> 400
+            ];
         }
 
         if ($this->appointment_time < date('H:i') && $this->appointment_date == date('Y-m-d')){
-            return "Cannot set previous time";
+            return ["status" => "error",
+            "message" => "Cannot set previous time",
+            "code"=> 400
+            ];
         }
 
         $db = new Database;
@@ -128,7 +164,10 @@
         $appointmentEdit = new Appointment($connection);
         
         $editAppointment = $appointmentEdit -> updateAppointment($this->appointment_date , $this->appointment_time  ,$this->appointment_notes , $this->appointment_status , $appointment_id , $_SESSION['User_id']);
-        return true;
+        return ["status" => "success",
+            "message" => "Appointment edited successfully",
+            "code"=> 200
+            ];
     }
 
 

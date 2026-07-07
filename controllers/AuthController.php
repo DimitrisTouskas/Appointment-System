@@ -34,19 +34,35 @@
 {   
     // 1. VALIDATION
     if ($this->emptyInputRegister()) {
-        return "All fields are required";
+        return [
+            "status"=>"error",
+            "message"=>"All fields are required",
+            "code" => 400
+        ];
     }
 
     if (!$this->validEmail()) {
-        return "Invalid email format";
+        return [
+            "status"=>"error",
+            "message"=>"Invalid email format",
+            "code" => 400
+        ];
     }
 
     if ($this->password !== $this->password2) {
-        return "Passwords do not match";
+        return [
+            "status"=>"error",
+            "message"=>"Passwords do not match",
+            "code" => 400
+        ];
     }
 
     if(!$this->validPasswordLenght()){
-        return "Too few characters on password need to add more";
+        return [
+            "status"=>"error",
+            "message"=>"Too few characters on password need to add more",
+            "code" => 400
+        ];
     }
 
     // 2. BUSINESS RULES (Model check)
@@ -58,14 +74,16 @@
     if ($user->emailExists($this->email)) {
         return [
             "status"=>"error",
-            "message"=>"Email already exists"
+            "message"=>"Email already exists",
+            "code" => 409
         ];
     }
 
     if ($user->usernameExists($this->username)) {
         return [
             "status"=>"error",
-            "message"=>"Username already exists"
+            "message"=>"Username already exists",
+            "code" => 409
         ];
     }
 
@@ -84,11 +102,12 @@
     // 5. RESPONSE
     if ($result) {
         return ["status" => "success",
-                "message" => "User registered successfully"];
+                "message" => "User registered successfully",
+                "code"=> 200
+                ];
     }
 
-    return ["status" => "error",
-                "message" => "Something went wrong try again"];
+    return ["status" => "error", "message" => "Something went wrong try again","code" => 500];
 }
 
 private function emptyInputLogin(): bool
@@ -133,11 +152,18 @@ public function loginCheck()
 public function login()
 {  
     if ($this->emptyInputLogin()) {
-        return "All fields are required";
+        return ["status" => "error",
+                "message" => "All fields are required",
+                "code"=> 400
+                ];
     }
     
     if (!$this->validEmail()) {
-        return "Invalid email format";
+        return ["status" => "error",
+                "message" => "Invalid email format",
+                "code"=> 400
+                ];
+        
     }
     $db = new Database;
     $connection = $db->connect();
@@ -147,25 +173,40 @@ public function login()
     if($foundUser!== Null){
         $passCheck = password_verify($this->password , $foundUser['password']);
     }else {
-        echo "User not found. Maybe wanna create account";
-        exit();
+        return ["status" => "error",
+                "message" => "User not found. Maybe wanna create account",
+                "code"=> 401
+                ];
     }
 
     if($this->isAccountLocked($foundUser)){
-        echo "Your account is locked. Try again later.";
-        exit();
+        return ["status" => "error",
+                "message" => "Your account is locked. Try again later.",
+                "code"=> 403
+                ];
     }
 
     if ($passCheck===true){
         $_SESSION["User_id"] = $foundUser['id'];
         $user->resetFailedAttempts($foundUser['id']);
-        $this->redirect("/appointment-system/public/appointments");
-    }else{
-        echo "Wrong credentials try again";
+        return ["status" => "success",
+        "message" => "Success Login!",
+        "code"=> 200
+        ];
+    }else {
         $user->incrementFailedAttempts($foundUser['id']);
         if($foundUser['failed_login_attempts'] + 1 >= 5){
             $user->lockAccount($foundUser['id'], 15);
-        }
+            return ["status" => "error",
+                "message" => "Too many tries. Try again later.",
+                "code"=> 403
+                ];
+    
+        }else 
+            return ["status" => "error",
+            "message" => "Wrong Credentials!",
+            "code"=> 401
+            ];
     }
 }
 }

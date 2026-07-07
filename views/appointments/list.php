@@ -20,11 +20,11 @@
                 <td><?= htmlspecialchars($appointment['appointment_time']) ?></td>
                 <td><?= htmlspecialchars($appointment['notes'] ?? '') ?></td>
                 <td><form action="/appointment-system/public/appointments/delete" method="GET">
-                        <button>Delete</button>
+                        <button class="btn btn-danger">Delete</button>
                         <input type="hidden" id="appointment_id" name="appointment_id" value="<?= htmlspecialchars($appointment['id']); ?>" />
                     </form>
                     <form action="/appointment-system/public/appointments/edit" method = "GET" >
-                        <button>Edit</button>
+                        <button class="btn btn-primary">Edit</button>
                         <input type="hidden" id="appointment_id" name="appointment_id" value="<?= htmlspecialchars($appointment['id']) ?>" />
                     </form>
                 </td>
