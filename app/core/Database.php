@@ -1,6 +1,7 @@
 <?php
     // include "../appointment-system/config/config.php";
     namespace App\Core;
+
     class Database{
 
         private array $config;
@@ -21,7 +22,7 @@
 
             if ($this->conn->connect_error){
                 error_log("Prepare failed :" . $this->conn->error );
-                return false;
+                throw new DatabaseException('Error: ' . $this->conn->connect_error , 500);
             }
             return $this->conn;
         }

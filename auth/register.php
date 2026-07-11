@@ -1,5 +1,7 @@
 <?php
     use App\Controllers\AuthController;
+    use App\Core\DatabaseException;
+
 
       if($_SERVER["REQUEST_METHOD"]==="GET"){
         if (isset($_SESSION['User_id'])) {
@@ -19,9 +21,17 @@
 
         $auth = new AuthController(email:$email , first_name:$firstname , last_name:$lastname ,password: $password , username:$username ,  password2:$password2);
     
-    if($_POST['security_token']=== $_SESSION['csrf_token']){   
-        $result = $auth->register();
+    if($_POST['security_token']=== $_SESSION['csrf_token']){ 
         
+        try{
+        $result = $auth->register();
+        }catch(DatabaseException $e){
+            $result = [
+                "status"=> "error",
+                "message" => $e->getMessage(),
+                "code" => $e->getCode()
+            ];
+        }
         unset($_SESSION['csrf_token']);
         }else{
         $result = ["status" => "error",

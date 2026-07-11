@@ -1,13 +1,22 @@
 <?php
     use App\Controllers\AppointmentController;
-    
+use App\Core\DatabaseException;
+
     if($_SERVER["REQUEST_METHOD"]==="POST"){
         $appointment_id = $_POST['appointment_id']??'';
         
 
     if($_POST['security_token']=== $_SESSION['csrf_token']){
         $deleteAppointment = new AppointmentController();
+        try{
         $results = $deleteAppointment->delete($appointment_id);
+        }catch(DatabaseException $e){
+             $results = [
+                "status"=> "error",
+                "message" => $e->getMessage(),
+                "code" => $e->getCode()
+            ];
+        }
     }else{
         $results = ["status" => "error",
             "message" => "Invalid request",

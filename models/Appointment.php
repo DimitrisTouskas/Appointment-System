@@ -1,5 +1,6 @@
 <?php
     namespace App\Models;
+    use App\Core\DatabaseException;
     use App\Core\Model;
 
     class Appointment extends Model{
@@ -14,14 +15,15 @@
             
             if (!$stmt) {
              error_log("Prepare failed: " . $this->conn->error);
-    return false;
+            throw new DatabaseException('Error: ' . $this->conn->connect_error , 500);
 }
 
             $stmt->bind_param("sssi", $appointment_date , $appointment_time , $appointment_note , $user_id);
 
             if (!$stmt->execute()) {
                 error_log("Execute failed: " . $stmt->error);
-                return false;
+                throw new DatabaseException('Error: ' . $this->conn->connect_error , 500);
+
             }
             return true;
         }
@@ -44,7 +46,7 @@
             
             if(!$stmt){
             error_log("Prepare failed: " . $this->conn->error);
-            return [];
+            throw new DatabaseException('Error: ' . $this->conn->connect_error , 500);  
             }
             $stmt -> bind_param('iii' , $user_id , $limit , $offset);
             $stmt ->execute();
@@ -58,7 +60,8 @@
 
             if(!$stmt){
             error_log("Prepare failed: " . $this->conn->error);
-            return false;
+            throw new DatabaseException('Error: ' . $this->conn->connect_error , 500);
+
             }
             $stmt -> bind_param("ii", $appointment_id , $user_id);
             $stmt -> execute();
@@ -71,7 +74,7 @@
 
             if(!$stmt){
             error_log("Prepare failed: " . $this->conn->error);
-            return false;
+            throw new DatabaseException('Error: ' . $this->conn->connect_error , 500);
             }
             $stmt -> bind_param('ii', $appointment_id , $user_id);
             $stmt->execute();
@@ -86,14 +89,14 @@
             
             if (!$stmt) {
             error_log("Prepare failed: " . $this->conn->error);
-            return false;
+            throw new DatabaseException('Error: ' . $this->conn->connect_error , 500);
             }
 
             $stmt->bind_param("ssssii", $appointment_date , $appointment_time , $appointment_status ,$appointment_notes , $appointment_id , $user_id);
 
             if (!$stmt->execute()) {
             error_log("Execute failed: " . $stmt->error);
-            return false;
+            throw new DatabaseException('Error: ' . $this->conn->connect_error , 500);
             }
             return true;
         }

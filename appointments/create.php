@@ -1,6 +1,7 @@
 <?php
     use App\Controllers\AppointmentController;
     use App\Core\Auth;
+use App\Core\DatabaseException;
 
      if ($_SERVER["REQUEST_METHOD"]==="GET"){
         if(Auth::isLoggedIn()){
@@ -18,7 +19,15 @@
         
     if($_POST['security_token']=== $_SESSION['csrf_token']){
         $createAppointment = new AppointmentController($appointment_date , $appointment_time , $appointment_notes);
+        try{
         $result = $createAppointment->create();
+        }catch(DatabaseException $e){
+            $result = [
+                "status"=> "error",
+                "message" => $e->getMessage(),
+                "code" => $e->getCode()
+            ];
+        }
     
         unset($_SESSION['csrf_token']);
         }else{

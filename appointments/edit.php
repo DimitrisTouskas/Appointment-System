@@ -1,6 +1,8 @@
 <?php
     use App\Controllers\AppointmentController;
+    use App\Core\DatabaseException;
     
+
     if($_SERVER["REQUEST_METHOD"]==="POST"){
         $appointment_id = $_POST['appointment_id']??'';
         $appointment_date = $_POST['appointment_date']??'';
@@ -10,7 +12,15 @@
 
         if($_POST['security_token']=== $_SESSION['csrf_token']){
         $editAppointmentPush = new AppointmentController($appointment_date, $appointment_time, $appointment_notes, $appointment_status);
+        try{
         $results = $editAppointmentPush->update($appointment_id);
+        }catch(DatabaseException $e){
+             $results = [
+                "status"=> "error",
+                "message" => $e->getMessage(),
+                "code" => $e->getCode()
+            ];
+        }
         }else{
         $results = ["status" => "error",
             "message" => "Invalid request",
