@@ -101,4 +101,22 @@
             return true;
         }
 
+        public function updateStatus($appointment_id , $status , $user_id) {
+            $sql= "UPDATE appointments SET status=? WHERE id = ? AND user_id = ?";
+            $stmt = $this->conn-> prepare($sql);
+
+            if(!$stmt){
+                error_log("Prepare failed: " . $this->conn->error);
+                throw new DatabaseException('Error: ' . $this->conn->connect_error , 500);
+            }
+            $stmt->bind_param("sii", $status , $appointment_id , $user_id);
+
+            if (!$stmt->execute()) {
+            error_log("Execute failed: " . $stmt->error);
+            throw new DatabaseException('Error: ' . $this->conn->connect_error , 500);
+            }
+            return true;
+            
+        }
+
     }

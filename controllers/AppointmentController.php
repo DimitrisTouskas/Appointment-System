@@ -182,4 +182,24 @@
         return $getData;
     }
 
+    public function updateStatus($appointment_id , $status){
+        $this->sessionCheck();
+
+        if(!in_array($status , ['cancelled' , 'pending' , 'confirmed' , 'completed'] )){
+            return ["status" => "error",
+            "message" => "Choose a status from the options",
+            "code"=> 400
+            ];
+        }else{
+            $db = new Database;
+        $connection = $db->connect();
+        $results = new Appointment($connection);
+        $results -> updateStatus($appointment_id , $status , $_SESSION['User_id']);
+        return ["status" => "success",
+            "message" => "Status updated successfully",
+            "code"=> 200
+            ];  
+        }
+    }
+
 }
