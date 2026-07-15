@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/appointment-system/public/assets/css/mainStyle.css">
+    <?php  $cssVersion=  filemtime(__DIR__ . "/../../public/assets/css/mainStyle.css"); ?>
+    <link rel="stylesheet" href="/appointment-system/public/assets/css/mainStyle.css?v=<?=$cssVersion?>">
+    
     
     <title>Appointment-System</title>
 </head>

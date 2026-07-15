@@ -1,8 +1,8 @@
 .navbar-nav.mr-auto {
     display: inline-block;
     list-style-type: none;
-    margin-left: 500px;
-    margin-right: 500px;
+    margin-left: auto;
+    margin-right: auto;
     justify-content: space-between;
 }
 
@@ -32,4 +32,8 @@
     color: #333333;
     margin-left: 14px;
     border-radius: 28px;
+}
+
+.card-body form{
+    width: 100%; 
 }

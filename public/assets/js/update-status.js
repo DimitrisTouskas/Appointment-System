@@ -2,7 +2,7 @@ document.addEventListener("click" , handleStatusClick);
 
 
 async function handleStatusClick(event){
-    if (!event.target.classList.contains('dropdown-item')) return false; 
+    if (!event.target.dataset.status) return false; 
     event.preventDefault();
     let dropdownBox= event.target.closest(".dropdown");
     const btn = dropdownBox.querySelector("[data-appointment-id]");

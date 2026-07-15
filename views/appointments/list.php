@@ -51,5 +51,6 @@
         <?php endif;?>
     </div>
 </main>
-<script src="/appointment-system/public/assets/js/update-status.js"></script>
+<?php  $jsVersion=  filemtime(__DIR__ . "/../../public/assets/js/update-status.js"); ?>
+<script src="/appointment-system/public/assets/js/update-status.js?v=<?=$jsVersion?>"></script>
 <?php require __DIR__ . '/../layout/footer.php'; ?>

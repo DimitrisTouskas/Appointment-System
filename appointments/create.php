@@ -1,7 +1,7 @@
 <?php
     use App\Controllers\AppointmentController;
     use App\Core\Auth;
-use App\Core\DatabaseException;
+    use App\Core\DatabaseException;
 
      if ($_SERVER["REQUEST_METHOD"]==="GET"){
         if(Auth::isLoggedIn()){
