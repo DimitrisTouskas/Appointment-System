@@ -1,12 +1,4 @@
 <?php require __DIR__ . '/../layout/header.php'; ?>
-<style>
-    body{
-        background-color: #676666;
-    }
-    div.card-body{
-        background-color: #ffffff;
-    }
-</style>
 <main>
     <div class="card mx-auto" style="max-width: 420px"> 
         <div class="card-body">
