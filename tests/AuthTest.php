@@ -2,11 +2,8 @@
 // Φέρνει μέσα την κλάση TestCase του PHPUnit — τη γονική κλάση που δίνει
 // πρόσβαση σε όλα τα assert*() methods (assertTrue, assertFalse, κ.λπ.)
 use PHPUnit\Framework\TestCase;
+use App\Core\Auth;
 
-// Το project δεν έχει PSR-4 autoloading, οπότε φέρνουμε χειροκίνητα
-// την κλάση Auth (αυτή που θέλουμε να τεστάρουμε) — ίδιο pattern με
-// κάθε require_once που έχεις ήδη σε όλο το project.
-require_once __DIR__ . '/../app/core/Auth.php';
 class AuthTest extends TestCase
 {
     public function testLogin()

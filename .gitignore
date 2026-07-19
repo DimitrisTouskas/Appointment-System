@@ -2,3 +2,4 @@
 PENDINGS.md
 vendor/
 .env
+.phpunit.result.cache
