@@ -22,6 +22,8 @@ jobs:
           extensions: mysqli
       - run: composer install
       - run: mysql -h127.0.0.1 -uroot -proot schemaDB_test < database/schemaDB.sql
+      - run: mysql -h127.0.0.1 -uroot -proot schemaDB_test -e "INSERT INTO users (username, first_name, last_name, email, password) VALUES ('testuser', 'Test', 'User', 'testuser@example.com', 'dummy_hash');"
+      - run: mysql -h127.0.0.1 -uroot -proot schemaDB_test -e "INSERT INTO users (username, first_name, last_name, email, password) VALUES ('testuser2', 'Test', 'UserTwo', 'testuser2@example.com', 'dummy_hash');"
       - run: echo "DB_HOST=127.0.0.1" >> .env
       - run: echo "DB_NAME=schemaDB" >> .env
       - run: echo "DB_USERNAME=root" >> .env
