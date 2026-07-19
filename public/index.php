@@ -22,7 +22,8 @@
         '/appointments/create' => __DIR__ . '/../appointments/create.php',
         '/appointments/edit' => __DIR__ . '/../appointments/edit.php',
         '/appointments/delete' => __DIR__ . '/../appointments/delete.php',
-        '/appointments/update-status' => __DIR__ . '/../appointments/update-status.php'
+        '/appointments/update-status' => __DIR__ . '/../appointments/update-status.php',
+        '/dashboard' => __DIR__ . '/../dashboard.php'
     ];
     
     if(isset($routing[$route])){

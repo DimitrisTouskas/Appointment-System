@@ -18,7 +18,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-0">
-  <a class="navbar-brand bi bi-calendar-check nav-link active" href="#">Appointement-System</a>
+  <a class="navbar-brand bi bi-calendar-check nav-link active" href="/appointment-system/public/dashboard">Appointement-System</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -26,7 +26,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/appointment-system/public/dashboard">Home <span class="sr-only">(current)</span></a>
       </li>
       <?php if(Auth::isLoggedIn()): ?>
       <li class="nav-item dropdown">
