@@ -13,6 +13,7 @@ jobs:
           MYSQL_DATABASE: schemaDB_test
         ports:
           -  3306:3306
+        options: --health-cmd="mysqladmin ping -h localhost" --health-interval=10s --health-timeout=5s --health-retries=5
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
