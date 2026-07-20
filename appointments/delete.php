@@ -1,6 +1,6 @@
 <?php
     use App\Controllers\AppointmentController;
-use App\Core\DatabaseException;
+    use App\Core\DatabaseException;
 
     if($_SERVER["REQUEST_METHOD"]==="POST"){
         $appointment_id = $_POST['appointment_id']??'';

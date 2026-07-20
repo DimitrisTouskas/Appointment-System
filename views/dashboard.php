@@ -1,4 +1,5 @@
 <?php require __DIR__ . '/layout/header.php'; ?>
+<?php /** @var array $articles */ ?>
 <main>
     <div class="row row-cols-1 row-cols-md-3 g-3">
         <?php foreach ($articles as $article): ?>

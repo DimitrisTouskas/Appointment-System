@@ -3,6 +3,8 @@ services:
     build: .
     ports:
       - "8080:80"
+    volumes:
+      - .:/var/www/html/appointment-system
     environment:
       DB_HOST: db
     depends_on:
@@ -14,3 +16,4 @@ services:
       MYSQL_DATABASE: schemaDB
     volumes:
       - ./database/schemaDB.sql:/docker-entrypoint-initdb.d/schemaDB.sql
+      - ./database/schemaDB_test.sql:/docker-entrypoint-initdb.d/schemaDB_test.sql
