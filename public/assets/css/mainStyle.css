@@ -47,3 +47,13 @@ body{
     height: 180px;
     object-fit: cover;
 }
+
+.appointment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+main {
+    width: 100%;
+}

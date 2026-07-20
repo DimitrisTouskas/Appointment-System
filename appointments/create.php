@@ -7,7 +7,7 @@
         if(Auth::isLoggedIn()){
             require __DIR__ . "/../views/appointments/create.php";
         }else{
-            header("Location: /appointment-system/public/login");
+            header("Location: " . BASE_URL . "/login");
             exit();
      }
      }

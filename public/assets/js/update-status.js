@@ -1,4 +1,5 @@
 document.addEventListener("click" , handleStatusClick);
+let baseUrl = document.body.dataset.baseUrl;
 
 
 async function handleStatusClick(event){
@@ -11,11 +12,11 @@ async function handleStatusClick(event){
     const status1 = event.target.dataset.status;
 
     let body = new URLSearchParams({appointment_id:value , status:status1 , security_token:csrf});
-    let res = await fetch('/appointment-system/public/appointments/update-status' , {method:'POST' , body});
+    let res = await fetch(`${baseUrl}/appointments/update-status` , {method:'POST' , body});
     let result = await res.json();
 
     if(result['status']=== "success"){
-        window.location = '/appointment-system/public/appointments';
+        window.location = `${baseUrl}/appointments`;
 
        }else{
         alert(result.message);

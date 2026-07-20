@@ -37,7 +37,7 @@
     private function sessionCheck()
     {
         if (!Auth::isLoggedIn()){
-            $this->redirect("/appointment-system/public/login");
+            $this->redirect(BASE_URL . "/login");
         }
     }
 

@@ -36,7 +36,7 @@
         if($appointment!= NULL){
         require __DIR__ . "/../views/appointments/delete.php";
         }else{
-        header("Location: /appointment-system/public/appointments");
+        header("Location: " . BASE_URL . "/appointments");  
         exit();
         }
     }

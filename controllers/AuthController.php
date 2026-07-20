@@ -145,7 +145,7 @@ private function isAccountLocked($foundUser):bool{
 public function loginCheck()
 {       
     if (Auth::isLoggedIn()){
-        $this->redirect("/appointment-system/public/appointments");
+        $this->redirect(BASE_URL . "/appointments");
     }
 }
 

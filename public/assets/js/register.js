@@ -1,3 +1,4 @@
+let baseUrl = document.body.dataset.baseUrl;
 function validateForm(){
     let validationUsername = document.getElementById("username").value.trim();
     if (validationUsername ==""){
@@ -48,11 +49,11 @@ async function onRegisterSubmit(event){
        let body = new URLSearchParams({username:usernameRecieved,firstname:fistnameRecieved , lastname:lastnameRecieved,
          email:emailRecieved, password:passwordRecieved,password2:password2Recieved, security_token:tokenRecieved});
        
-       let res = await fetch('/appointment-system/public/register' , {method:'POST' , body});
+       let res = await fetch(`${baseUrl}/register` , {method:'POST' , body});
        let result = await res.json();
 
        if(result['status']=== "success"){
-        window.location = '/appointment-system/public/appointments';
+        window.location = `${baseUrl}/appointments`;
 
        }else{
         alert(result.message);

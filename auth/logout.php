@@ -1,7 +1,7 @@
 <?php
  
     session_destroy();
-    header("Location: /appointment-system/public/login");
+    header("Location: " . BASE_URL . "/login");
     exit();
 
 ?>

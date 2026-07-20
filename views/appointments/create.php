@@ -4,7 +4,7 @@
         <div class="card-body">
             <h5>New appointment</h5>
             <p class="text-muted">Pick a date and time, add optional notes.</p>
-            <form action="/appointment-system/public/appointments/create" method="POST" id="createForm">
+            <form action="<?= BASE_URL ?>/appointments/create" method="POST" id="createForm">
                 <div class="mb-3">
                 <label for="date" class="form-label" >Appointment Date</label>
                 <input type="date" name="appointment_date" id="appointment_date" class="form-control">
@@ -25,5 +25,5 @@
         </div>
     </div>
 </main>
-<script src="/appointment-system/public/assets/js/create-appointment.js"></script>
+<script src="<?= BASE_URL ?>/assets/js/create-appointment.js"></script>
 <?php require __DIR__ . '/../layout/footer.php'; ?>

@@ -5,7 +5,7 @@
 
       if($_SERVER["REQUEST_METHOD"]==="GET"){
         if (isset($_SESSION['User_id'])) {
-            header("Location: /appointment-system/public/appointments");
+            header("Location: " . BASE_URL . "/appointments");
             exit();
         }
         require __DIR__ . "/../views/auth/register.php";

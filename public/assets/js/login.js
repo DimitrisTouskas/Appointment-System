@@ -1,3 +1,4 @@
+let baseUrl = document.body.dataset.baseUrl;
 function validateForm(){
 
     let validationEmail = document.getElementById("email").value.trim();
@@ -28,11 +29,11 @@ async function onLoginSubmit(event){
        
        let body = new URLSearchParams({email:emailRecieved, password:passwordRecieved, security_token:tokenRecieved});
        
-       let res = await fetch('/appointment-system/public/login' , {method:'POST' , body});
+       let res = await fetch(`${baseUrl}/login` , {method:'POST' , body});
        let result = await res.json();
 
        if(result['status']=== "success"){
-        window.location = '/appointment-system/public/appointments';
+        window.location = `${baseUrl}/appointments`;
 
        }else{
         alert(result.message);

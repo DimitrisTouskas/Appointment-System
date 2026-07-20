@@ -12,6 +12,7 @@
     if ($basePath === '/') {
     $basePath = '';
 }
+    define('BASE_URL' , $basePath);
     $route = str_replace($basePath, '', $path);
 
     $routing = [

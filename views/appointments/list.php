@@ -8,7 +8,7 @@
 <?php require __DIR__ . '/../layout/header.php'; ?>
 <main>
     <?php $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); ?>
-<div class="row row-cols-1 row-cols-md-3 g-3" data-csrf-token="<?= $_SESSION['csrf_token'] ?>">
+<div class="appointment-grid" data-csrf-token="<?= $_SESSION['csrf_token'] ?>">
         <?php foreach($appointments as $appointment): ?>
         <div class="col">
   <div class="card">
@@ -28,11 +28,11 @@
         </ul>
       </div>
       <p><?= htmlspecialchars($appointment['notes'] ?? '') ?></p>
-      <p><form action="/appointment-system/public/appointments/delete" method="GET">
+      <p><form action="<?= BASE_URL ?>/appointments/delete" method="GET">
                 <button class="btn btn-danger">Delete</button>
                 <input type="hidden" id="appointment_id" name="appointment_id" value="<?= htmlspecialchars($appointment['id']); ?>" />
             </form>
-                <form action="/appointment-system/public/appointments/edit" method = "GET" >
+                <form action="<?= BASE_URL ?>/appointments/edit" method = "GET" >
                 <button class="btn btn-primary">Edit</button>
                 <input type="hidden" id="appointment_id" name="appointment_id" value="<?= htmlspecialchars($appointment['id']) ?>" />
             </form>
@@ -44,13 +44,13 @@
         <div>
 
         <?php if($currentPage > 1): $prevPage = $currentPage - 1; ?>
-            <a href="/appointment-system/public/appointments?page=<?= $prevPage ?>">Previous</a>        
+            <a href="<?= BASE_URL ?>/appointments?page=<?= $prevPage ?>">Previous</a>        
         <?php endif;?>
         <?php if($currentPage < $totalPages): $nextPage = $currentPage + 1; ?>
-            <a href="/appointment-system/public/appointments?page=<?= $nextPage ?>">Next</a>
+            <a href="<?= BASE_URL ?>/appointments?page=<?= $nextPage ?>">Next</a>
         <?php endif;?>
     </div>
 </main>
 <?php  $jsVersion=  filemtime(__DIR__ . "/../../public/assets/js/update-status.js"); ?>
-<script src="/appointment-system/public/assets/js/update-status.js?v=<?=$jsVersion?>"></script>
+<script src="<?= BASE_URL ?>/assets/js/update-status.js?v=<?=$jsVersion?>"></script>
 <?php require __DIR__ . '/../layout/footer.php'; ?>

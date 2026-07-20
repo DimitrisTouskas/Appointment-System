@@ -1,3 +1,4 @@
+let baseUrl = document.body.dataset.baseUrl;
 function validateForm(){
     let validationDate = document.getElementById("appointment_date").value.trim();
     if (validationDate ==""){
@@ -45,11 +46,11 @@ async function onEditSubmit(event){
        let body = new URLSearchParams({appointment_date:dateRecieved, appointment_time:timeRecieved, appointment_notes:notesRecieved ,
          appointment_id:idRecieved , status:statusRecieved , security_token:tokenRecieved});
        
-       let res = await fetch('/appointment-system/public/appointments/edit' , {method:'POST' , body});
+       let res = await fetch(`${baseUrl}/appointments/edit` , {method:'POST' , body});
        let result = await res.json();
 
        if(result['status']=== "success"){
-        window.location = '/appointment-system/public/appointments';
+        window.location = `${baseUrl}/appointments`;
 
        }else{
         alert(result.message);

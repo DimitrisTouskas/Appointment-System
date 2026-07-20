@@ -2,7 +2,7 @@
 <main class="d-flex align-items-center justify-content-center" style="min-height: 80vh">
     <div class="card mx-auto" style="max-width: 420px">
         <div class="card-body">
-            <form name="registerForm" id="registerForm" action="/appointment-system/public/register" method="POST">
+            <form name="registerForm" id="registerForm" action="<?= BASE_URL ?>/register" method="POST">
                 <h5> Sign Up </h5>
                 <div class="mb-3">
                     <label class="form-label" for="username">Username:</label>
@@ -35,12 +35,12 @@
                     </label>
                 </div>
                 <button class="btn btn-primary" type="submit">Register</button>
-                <footer> Already member? <a href="/appointment-system/public/login">Login Here</a></footer>
+                <footer> Already member? <a href="<?= BASE_URL ?>/login">Login Here</a></footer>
                 <input type="hidden" id="security_token" name="security_token" value="<?php $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
                     echo $_SESSION['csrf_token']; ?>" />
             </form>
         </div>
     </div>
 </main>
-<script src="/appointment-system/public/assets/js/register.js"></script>
+<script src="<?= BASE_URL ?>/assets/js/register.js"></script>
 <?php require __DIR__ . '/../layout/footer.php'; ?>
