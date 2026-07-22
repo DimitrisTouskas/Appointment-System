@@ -6,10 +6,9 @@
         if (isset($_SESSION['User_id'])) {
             header("Location: " . BASE_URL . "/appointments");
             exit();
-        }
-        require __DIR__ . "/../views/auth/login.php";
+            }
+            require __DIR__ . "/../views/auth/login.php";
     }
-
     if($_SERVER["REQUEST_METHOD"]=== "POST"){
         $email = $_POST['email']??'';
         $password = $_POST['password']??'';
@@ -35,7 +34,7 @@
             "code"=> 403
             ];
         }
-    
+        
         header('Content-Type: application/json');
         http_response_code($result['code']);
         echo json_encode($result);

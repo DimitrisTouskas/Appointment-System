@@ -57,3 +57,22 @@ body{
 main {
     width: 100%;
 }
+
+.flash-message{
+    display:none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    background-color: #d1e7dd;
+    color: #06180f;
+    border: 1px solid #badbcc;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    align-items: center;
+    justify-content: center;
+}

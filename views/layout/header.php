@@ -17,12 +17,14 @@
 </head>
 
 <body data-base-url="<?= BASE_URL  ?>">
+  
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-0">
   <a class="navbar-brand bi bi-calendar-check nav-link active" href="<?= BASE_URL ?>/dashboard">Appointement-System</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
+  <div id="flash-message" class="flash-message alert"></div>
+  <script src="<?= BASE_URL ?>/assets/js/flash-message-alert.js"></script>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">

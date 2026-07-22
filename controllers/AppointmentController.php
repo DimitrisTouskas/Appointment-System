@@ -92,7 +92,7 @@
         $db = new Database;
         $connection = $db->connect();
         $list = new Appointment($connection);
-        $perPage = 5; 
+        $perPage = 9; 
         $offset =($page - 1) * $perPage;
 
         $view_list = $list -> viewAppointments($_SESSION['User_id'] , $perPage , $offset );

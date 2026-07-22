@@ -50,6 +50,7 @@ async function onEditSubmit(event){
        let result = await res.json();
 
        if(result['status']=== "success"){
+        sessionStorage.setItem("message" , result.message);
         window.location = `${baseUrl}/appointments`;
 
        }else{
