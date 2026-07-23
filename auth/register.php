@@ -1,6 +1,8 @@
 <?php
     use App\Controllers\AuthController;
     use App\Core\DatabaseException;
+    use App\Core\Response;
+
 
 
       if($_SERVER["REQUEST_METHOD"]==="GET"){
@@ -21,28 +23,27 @@
 
         $auth = new AuthController(email:$email , first_name:$firstname , last_name:$lastname ,password: $password , username:$username ,  password2:$password2);
     
-    if($_POST['security_token']=== $_SESSION['csrf_token']){ 
-        
-        try{
+    if($_POST['security_token']!== $_SESSION['csrf_token']){ 
+        $result = ["status" => "error",
+                "message" => "Invalid request",
+                "code"=> 403
+                ];
+        Response::sendJsonResponse($result);
+        } 
+        try{            
         $result = $auth->register();
-        }catch(DatabaseException $e){
+        unset($_SESSION['csrf_token']);   
+        Response::sendJsonResponse($result);
+        
+        }catch (DatabaseException $e){
             $result = [
                 "status"=> "error",
                 "message" => $e->getMessage(),
                 "code" => $e->getCode()
+                
             ];
+            unset($_SESSION['csrf_token']);   
+            Response::sendJsonResponse($result);
         }
-        unset($_SESSION['csrf_token']);
-        }else{
-        $result = ["status" => "error",
-            "message" => "Invalid request",
-            "code"=> 403
-            ];
-            
-        }
-        header('Content-Type: application/json');
-            http_response_code($result['code']);
-            echo json_encode($result);
     }
-    
 ?>

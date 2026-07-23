@@ -1,32 +1,36 @@
 <?php
-    use App\Controllers\AppointmentController;
-    use App\Core\DatabaseException;
+use App\Controllers\AppointmentController;
+use App\Core\DatabaseException;
+use App\Core\Response;
 
     if($_SERVER["REQUEST_METHOD"]==="POST"){
         $appointment_id = $_POST['appointment_id']??'';
         
 
-    if($_POST['security_token']=== $_SESSION['csrf_token']){
+if($_POST['security_token']!== $_SESSION['csrf_token']){ 
+        $result = ["status" => "error",
+                "message" => "Invalid request",
+                "code"=> 403
+                ];
+        Response::sendJsonResponse($result);
+        } 
         $deleteAppointment = new AppointmentController();
-        try{
-        $results = $deleteAppointment->delete($appointment_id);
-        }catch(DatabaseException $e){
-             $results = [
+        try{            
+        $result = $deleteAppointment->delete($appointment_id);
+        unset($_SESSION['csrf_token']);   
+        Response::sendJsonResponse($result);
+        
+        }catch (DatabaseException $e){
+            $result = [
                 "status"=> "error",
                 "message" => $e->getMessage(),
                 "code" => $e->getCode()
+                
             ];
+            unset($_SESSION['csrf_token']);   
+            Response::sendJsonResponse($result);
         }
-    }else{
-        $results = ["status" => "error",
-            "message" => "Invalid request",
-            "code"=> 403
-            ];  
-        }
-        header('Content-Type: application/json');
-        http_response_code($results['code']);
-        echo json_encode($results);
-    }
+    } 
 
      if($_SERVER["REQUEST_METHOD"]==="GET"){
         $appointment_id = $_GET['appointment_id']??'';
