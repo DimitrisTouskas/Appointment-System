@@ -10,7 +10,7 @@
         $appointment_notes = $_POST['appointment_notes']??'';
         $appointment_status = $_POST['status']??'';
 
-       if($_POST['security_token']!== $_SESSION['csrf_token']){ 
+       if($_POST['security_token']!== ($_SESSION['csrf_token']??'')){
         $result = ["status" => "error",
                 "message" => "Invalid request",
                 "code"=> 403

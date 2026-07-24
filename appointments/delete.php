@@ -7,7 +7,7 @@ use App\Core\Response;
         $appointment_id = $_POST['appointment_id']??'';
         
 
-if($_POST['security_token']!== $_SESSION['csrf_token']){ 
+if($_POST['security_token']!== ($_SESSION['csrf_token']??'')){
         $result = ["status" => "error",
                 "message" => "Invalid request",
                 "code"=> 403

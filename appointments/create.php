@@ -18,7 +18,7 @@
         $appointment_time = $_POST["appointment_time"]??'';
         $appointment_notes = $_POST["appointment_notes"]??'';
         
-       if($_POST['security_token']!== $_SESSION['csrf_token']){ 
+       if($_POST['security_token']!== ($_SESSION['csrf_token']??'')){
         $result = ["status" => "error",
                 "message" => "Invalid request",
                 "code"=> 403

@@ -17,7 +17,7 @@
         $password2 = $_POST['password2']??'';
 
         $auth = new AuthController (email:$email , password:$password , password2:$password2);
-        if($_POST['security_token']!== $_SESSION['csrf_token']){     
+        if($_POST['security_token']!== ($_SESSION['csrf_token']??'')){     
         $result = ["status" => "error",
                 "message" => "Invalid request",
                 "code"=> 403
