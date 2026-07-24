@@ -186,28 +186,33 @@ public function login()
                 ];
     }
 
-    if ($passCheck===true){
-        $_SESSION["User_id"] = $foundUser['id'];
+   if ($passCheck===False){
+    $user->incrementFailedAttempts($foundUser['id']);
+    $errorOptions = $this->failAttempts($foundUser ,$user);
+    return $errorOptions;
+    }else {
         $user->resetFailedAttempts($foundUser['id']);
+        $_SESSION["User_id"] = $foundUser['id'];
         return ["status" => "success",
         "message" => "Success Login!",
         "code"=> 200
-        ];
-    }else {
-        $user->incrementFailedAttempts($foundUser['id']);
-        if($foundUser['failed_login_attempts'] + 1 >= 5){
-            $user->lockAccount($foundUser['id'], 15);
-            return ["status" => "error",
-                "message" => "Too many tries. Try again later.",
-                "code"=> 403
-                ];
-    
-        }else 
-            return ["status" => "error",
-            "message" => "Wrong Credentials!",
-            "code"=> 401
-            ];
+        ];      
     }
 
+}
+public  function failAttempts($foundUser ,$user){
+    if($foundUser['failed_login_attempts'] + 1 >= 5){
+        $user->lockAccount($foundUser['id'], 15);
+        return ["status" => "error",
+        "message" => "Too many tries. Try again later.",
+        "code"=> 403
+        ];
+        }
+    return ["status" => "error",
+        "message" => "Wrong Credentials!",
+        "code"=> 401
+        ]; 
+    
+             
 }
 }
