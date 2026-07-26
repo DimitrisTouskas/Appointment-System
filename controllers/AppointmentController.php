@@ -87,7 +87,7 @@
         
         }   
 
-    public function index(int $page = 1){
+    public function index(int $page = 1 , $status = null , $sort = 'asc' , $searchTerm = null){
         $this->sessionCheck();
         $db = new Database;
         $connection = $db->connect();
@@ -95,12 +95,14 @@
         $perPage = 9; 
         $offset =($page - 1) * $perPage;
 
-        $view_list = $list -> viewAppointments($_SESSION['User_id'] , $perPage , $offset );
-        $countResult = $list->countAppointments($_SESSION['User_id']);
+        $view_list = $list -> viewAppointments(user_id:$_SESSION['User_id'] , status:$status, sort:$sort , searchTerm:$searchTerm , limit:$perPage , offset:$offset );
+        $countResult = $list->countAppointments(user_id:$_SESSION['User_id'] , status:$status , searchTerm:$searchTerm);
         $totalCount = $countResult['TOTAL'];
         $totalPages = ceil($totalCount/$perPage);
         return ['appointments' => $view_list, 'currentPage' => $page, 'totalPages' => $totalPages];
     }
+
+
     public function delete($appointment_id){
         $this->sessionCheck();
 

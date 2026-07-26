@@ -28,11 +28,29 @@
             return true;
         }
 
-         public function countAppointments($user_id){
-            $sql = "SELECT COUNT(*) AS TOTAL FROM appointments WHERE user_id = ?";
+         public function countAppointments($user_id , $status = null , $searchTerm = null){
+            $conditions =["user_id = ?" ];
+            $values = [$user_id];
+            $types = "i";
+
+            if($status !== NULL){
+                $conditions[] = 'status = ?'; 
+                $values[] = $status; 
+                $types .= 's';
+            }
+            
+            if ($searchTerm !== NULL ){
+                $conditions[] ="notes LIKE ?" ;
+                $values[] = "%" . $searchTerm  . "%" ;
+                $types .= "s";
+            }
+            
+            $sql = "SELECT COUNT(*) AS TOTAL FROM appointments" 
+            ." WHERE " .implode(' AND ' , $conditions);
+
             $stmt = $this->conn->prepare($sql);
 
-            $stmt -> bind_param('i' , $user_id);
+            $stmt -> bind_param($types , ...$values);
             $stmt -> execute();
             $result = $stmt -> get_result();
             $assoc = $result->fetch_assoc();
@@ -40,15 +58,45 @@
          }
 
 
-        public function viewAppointments($user_id , $limit , $offset){
-            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM appointments WHERE user_id = ? ORDER BY appointment_time asc LIMIT ? OFFSET ? ";
+
+        // μολις τελειωσω το feauture να το ξαναδω παλι ωστε να καταλαβω λιγο καλυτερα πως δουλευει το dyname sql
+        public function viewAppointments($user_id , $limit , $offset  , $status = null , $sort = 'asc' , $searchTerm = null ){
+            $conditions =["user_id = ?" ];
+            $values = [$user_id];
+            $types = "i";
+
+            if($status !== NULL){
+                $conditions[] = 'status = ?'; 
+                $values[] = $status; 
+                $types .= 's';
+            }
+            
+            if ($searchTerm !== NULL ){
+                $conditions[] ="notes LIKE ?" ;
+                $values[] = "%" . $searchTerm  . "%" ;
+                $types .= "s";
+            }
+            
+            $direction = ($sort === 'asc') ? 'ASC' : 'DESC';
+
+            
+
+            $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM appointments "
+            ."WHERE ". implode(' AND ' , $conditions)
+            .' ORDER BY appointment_date '. $direction
+            .'  LIMIT ? OFFSET ? ';
+            
+            $values[] = $limit; 
+            $values[] = $offset;
+            $types .= 'ii';
+
             $stmt = $this->conn->prepare($sql);
             
             if(!$stmt){
             error_log("Prepare failed: " . $this->conn->error);
             throw new DatabaseException('Error: ' . $this->conn->connect_error , 500);  
             }
-            $stmt -> bind_param('iii' , $user_id , $limit , $offset);
+            $stmt -> bind_param($types , ...$values);
             $stmt ->execute();
             $result = $stmt->get_result();
             $assoc = $result->fetch_all(MYSQLI_ASSOC);

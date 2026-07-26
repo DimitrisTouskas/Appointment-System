@@ -8,6 +8,28 @@
 <?php require __DIR__ . '/../layout/header.php'; ?>
 <main>
     <?php $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); ?>
+<form action="<?= BASE_URL ?>/appointments" method="GET">
+<div class="container">
+    <div class="status-dropdown">
+        <select name="status" id="status">
+            <option value="" >All</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="completed">Completed</option>
+        </select>
+    </div>
+
+    <div class="sort-dropdown">
+        <select name="sort" id="sort">
+            <option value="asc">Ascending Sort</option>
+            <option value="desc">Descending Sort</option>
+        </select>
+    </div>
+</div>
+<button type="submit">Search</button>
+<input type="hidden" id="searchTerm" name="searchTerm" value="<?= htmlspecialchars("$searchTerm"??''); ?>" />
+</form>
 <div class="appointment-grid" data-csrf-token="<?= $_SESSION['csrf_token'] ?>">
         <?php foreach($appointments as $appointment): ?>
         <div class="col">

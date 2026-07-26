@@ -48,10 +48,10 @@
         <a class="nav-link" href="#">Contact Us</a>
       </li>
     </ul>
-    <form>
+    <form action="<?= BASE_URL ?>/appointments" method="GET">
       <div class="search">
-        <span class="search-icon material-symbols-outlined">search</span>
-        <input class ="search-input" type="search" placeholder="Search">
+        <span class="search-icon material-symbols-outlined" >search</span>
+        <input id="SearchTerm" name="searchTerm" class ="search-input" type="search" placeholder="Search">
       </div>
     </form>
     <ul class="navbar-nav">
