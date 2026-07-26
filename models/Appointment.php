@@ -29,23 +29,10 @@
         }
 
          public function countAppointments($user_id , $status = null , $searchTerm = null){
-            $conditions =["user_id = ?" ];
-            $values = [$user_id];
-            $types = "i";
-
-            if($status !== NULL){
-                $conditions[] = 'status = ?'; 
-                $values[] = $status; 
-                $types .= 's';
-            }
-            
-            if ($searchTerm !== NULL ){
-                $conditions[] ="notes LIKE ?" ;
-                $values[] = "%" . $searchTerm  . "%" ;
-                $types .= "s";
-            }
+            [$conditions, $values, $types] = $this->buildFilters($user_id, $status, $searchTerm);
             
             $sql = "SELECT COUNT(*) AS TOTAL FROM appointments" 
+
             ." WHERE " .implode(' AND ' , $conditions);
 
             $stmt = $this->conn->prepare($sql);
@@ -61,25 +48,8 @@
 
         // μολις τελειωσω το feauture να το ξαναδω παλι ωστε να καταλαβω λιγο καλυτερα πως δουλευει το dyname sql
         public function viewAppointments($user_id , $limit , $offset  , $status = null , $sort = 'asc' , $searchTerm = null ){
-            $conditions =["user_id = ?" ];
-            $values = [$user_id];
-            $types = "i";
-
-            if($status !== NULL){
-                $conditions[] = 'status = ?'; 
-                $values[] = $status; 
-                $types .= 's';
-            }
-            
-            if ($searchTerm !== NULL ){
-                $conditions[] ="notes LIKE ?" ;
-                $values[] = "%" . $searchTerm  . "%" ;
-                $types .= "s";
-            }
-            
-            $direction = ($sort === 'asc') ? 'ASC' : 'DESC';
-
-            
+           [$conditions, $values, $types] = $this->buildFilters($user_id, $status, $searchTerm);
+            $direction = ($sort === 'asc') ? 'ASC' : 'DESC';          
 
             $sql = "SELECT id , appointment_date , appointment_time , status , notes , created_at FROM appointments "
             ."WHERE ". implode(' AND ' , $conditions)
@@ -165,6 +135,27 @@
             }
             return true;
             
+        }
+
+        private function buildFilters($user_id , $status , $searchTerm){
+            $conditions =["user_id = ?" ];
+            $values = [$user_id];
+            $types = "i";
+
+            if($status !== NULL){
+                $conditions[] = 'status = ?'; 
+                $values[] = $status; 
+                $types .= 's';
+            }
+            
+            if ($searchTerm !== NULL ){
+                $conditions[] ="notes LIKE ?" ;
+                $values[] = "%" . $searchTerm  . "%" ;
+                $types .= "s";
+            }
+
+            $filters = [$conditions , $values , $types];
+            return $filters;
         }
 
     }

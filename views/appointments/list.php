@@ -1,6 +1,7 @@
 <?php /** @var array $appointments */ ?>
 <?php /** @var int $currentPage */ ?>
-<?php /** @var int $totalPages */
+<?php /** @var int $totalPages */ ?>
+<?php /** @var string $searchTerm */ ?>
 
 
 

@@ -1,5 +1,6 @@
 .DS_Store
 PENDINGS.md
+PENDINGS2.md
 vendor/
 .env
 .phpunit.result.cache
