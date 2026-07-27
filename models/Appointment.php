@@ -46,7 +46,7 @@
 
 
 
-        // μολις τελειωσω το feauture να το ξαναδω παλι ωστε να καταλαβω λιγο καλυτερα πως δουλευει το dyname sql
+        
         public function viewAppointments($user_id , $limit , $offset  , $status = null , $sort = 'asc' , $searchTerm = null ){
            [$conditions, $values, $types] = $this->buildFilters($user_id, $status, $searchTerm);
             $direction = ($sort === 'asc') ? 'ASC' : 'DESC';          
